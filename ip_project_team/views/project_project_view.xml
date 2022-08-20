@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="form_view_project_project_inherit_ip">
+            <field name="name">form.view.project.project.inherit.ip</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook//field[@name='user_id']" position="before">
+                    <field name="team_id" widget="many2one_tags" options="{'no_create': True}"/>
+                </xpath>
+                <xpath expr="//notebook//page[@name='settings']" position="after">
+                    <page name="details" string="Project Team" attrs="{'invisible': [('team_id', '=', False)]}">
+                        <group>
+                            <field name="team_members" widget="many2many_tags"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_project_kanban_inherit_ip">
+            <field name="name">project.project.kanban.inherit.ip</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban//field[@name='partner_id']" position="after">
+                    <field name="team_id"/>
+                    <field name="user_id"/>
+                </xpath>
+                <xpath expr="//templates//div[hasclass('o_primary')]" position="inside">
+                    <div class="row" t-if="record.team_id.value">
+                        <strong>Team: </strong>&amp;nbsp;<t t-esc="record.team_id.value"/>
+                    </div>
+                    <div class="row" t-if="record.user_id.value">
+                        <strong>Manager: </strong>&amp;nbsp;<t t-esc="record.user_id.value"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

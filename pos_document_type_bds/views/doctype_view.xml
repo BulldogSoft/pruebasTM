@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="pos_doctype_view">
+            <field name="name">pos.doc.type</field>
+            <field name="model">pos.doc.type</field>
+            <field name="arch" type="xml">
+                <form string="Tipo de documento">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="pos_doctype_form_view">
+            <field name="name">doc.type.form</field>
+            <field name="model">pos.doc.type</field>
+            <field name="arch" type="xml">
+                <form string="Tipo de documento">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pos_doctype_tree_view">
+            <field name="name">Tipo de documento</field>
+            <field name="model">pos.doc.type</field>
+            <field name="arch" type="xml">
+                <tree string="Lista de tipos de documento">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pos_doctype_search_view">
+            <field name="name">Tipo de Documento Search</field>
+            <field name="model">pos.doc.type</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="code"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="pos_doctype_action">
+            <field name="name">Tipo de documento POS</field>
+            <field name="res_model">pos.doc.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="pos_doctype_menu" sequence="2" name="Tipo de Documento POS"
+                  parent="point_of_sale.menu_point_config_product"
+                  action="pos_doctype_action"/>
+
+        <!--   <menuitem id="sales_pushmoney_worksheet_menu_invoice" sequence="1" name="Registros Pushmoney"
+                     parent="sales_pushmoney_menu_main_invoice"
+                     action="sales_pushmoney_worksheet_action"/>-->
+    </data>
+</openerp>

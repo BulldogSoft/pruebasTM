@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_unico_tm">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="inv">
+                    <t t-if="inv.journal_id.code == 'FCF'">
+                        <div class="header">
+                            <div class="pre_header_tm_fcf">
+                            </div>
+                            <div class="header_info_tm_fcf container">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td><span t-esc="inv.invoice_user_id.name"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><span t-esc="inv.partner_id.name"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span t-field="inv.invoice_date" t-options='{"format": "dd/MM/yyyy"}'></span></td>
+                                            <td>
+                                                <t t-if="inv.invoice_payment_term_id.name == 'Pago inmediato'">
+                                                    <span>Contado</span>
+                                                </t>
+                                                <t t-if="inv.invoice_payment_term_id.name != 'Pago inmediato'">
+                                                    <span>Credito</span>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="page">
+                            <div class="productos_fcf">
+                                <t t-set="ventas_no_sujetas" t-value="0"></t>
+                                <t t-set="ventas_exentas" t-value="0"></t>
+                                <t t-set="ventas_afectas" t-value="0"></t>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="inv.invoice_line_ids" t-as="line">
+                                            <tr>
+                                                <td><span t-field="line.product_id.name" style="margin-right:6px;"/><span t-esc="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/></td>
+                                                <td><span t-esc="line.quantity"></span></td>
+                                                <!--price unit-->
+                                                <td>
+                                                    <t t-foreach="inv.fiscal_position_id" t-as="f">
+                                                        <t t-if="f.name != 'Ventas Exentas' or f.name != 'Ventas No Sujetas' or f.name != 'Internacionales'">
+                                                            <span t-esc="line.price_unit * 1.13" t-options='{"widget": "float", "precision": 2}'/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="line.price_unit" t-options='{"widget": "float", "precision": 2}'/>
+                                                        </t>
+                                                    </t>
+                                                </td>
+                                                <td t-foreach="inv.fiscal_position_id" t-as="f" >
+                                                    <t t-if="f.name == 'Ventas No Sujetas'">
+                                                        <span  t-esc="line.price_subtotal"
+                                                               t-options='{"widget": "float", "precision": 2}'/>
+                                                        <t t-set="ventas_no_sujetas" t-value="ventas_no_sujetas + line.price_subtotal"></t>
+                                                    </t>
+                                                </td>
+                                                <td t-foreach="inv.fiscal_position_id" t-as="f">
+                                                    <t t-if="f.name == 'Ventas Exentas'">
+                                                        <span  t-esc="l.price_subtotal"  t-options='{"widget": "float", "precision": 2}'/>
+                                                        <t t-set="ventas_exentas" t-value="ventas_exentas + l.price_subtotal"></t>
+                                                    </t>
+                                                </td>
+                                                <td t-foreach="inv.fiscal_position_id" t-as="f">
+                                                    <t t-if="f.name != 'Ventas Exentas' or f.name != 'Ventas No Sujetas'">
+                                                        <t t-if="f.name != 'Ventas Exentas' or f.name != 'Ventas No Sujetas' or f.name != 'Internacionales'">
+                                                            <span t-esc="line.price_subtotal * 1.13" t-options='{"widget": "float", "precision": 2}'/>
+                                                        </t>
+                                                        <t t-if="f.name == 'Internacionales'">
+                                                            <span t-esc="l.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                                                        </t>
+                                                        <t t-if="f.name == 'Ventas Exentas' or f.name == 'Ventas No Sujetas'">
+                                                        </t>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="footer_tm_fcf last-page">
+                                <div class="footer_container">
+                                    <div class="footer_left">
+                                        <p><span t-field="inv.num_word"></span></p>
+                                    </div>
+                                    <div class="footer_right">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                        <t t-if="ventas_no_sujetas > 0">
+                                                            <span t-esc="ventas_no_sujetas"/>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                        <t t-if="ventas_exentas > 0">
+                                                            <span t-esc="ventas_exentas"/>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-foreach="inv.fiscal_position_id" t-as="f">
+                                                            <t t-if="f.name != 'Ventas Exentas' or f.name != 'Ventas No Sujetas' or f.name != 'Internacionales'">
+                                                                <p class="sumas" t-esc="float(inv.amount_untaxed * 1.13)" t-options='{"widget": "float", "precision": 2}'/>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <p class="sumas" t-esc="inv.amount_untaxed" t-options='{"widget": "float", "precision": 2}'></p>
+                                                            </t>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                        <t t-if="ventas_no_sujetas > 0">
+                                                            <span t-esc="ventas_no_sujetas"/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                        <t t-if="ventas_exentas > 0">
+                                                            <span t-esc="ventas_exentas"/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <p t-esc="float(inv.amount_total)"
+                                                           t-options='{"widget": "float", "precision": 2}'/>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-if="inv.journal_id.code == 'CCF'">
+                        <div class="header">
+                            <div class="pre_header_tm_ccf">
+                            </div>
+                            <div class="header_info_tm_ccf container">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td><span t-esc="inv.invoice_user_id.name"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><span t-esc="inv.partner_id.name"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><span t-esc="inv.partner_id.street"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span t-esc="inv.partner_id.munic_id.name"></span></td>
+                                            <td><span t-esc="inv.partner_id.state_id.name"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span t-esc="inv.partner_id.nit"></span></td>
+                                            <td><span t-esc="inv.partner_id.nrc"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span t-esc="inv.partner_id.giro"></span></td>
+                                            <td><span></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span t-field="inv.invoice_date" t-options='{"format": "dd/MM/yyyy"}'></span></td>
+                                            <td>
+                                                <t t-if="inv.invoice_payment_term_id.name == 'Pago inmediato'">
+                                                    <span>Contado</span>
+                                                </t>
+                                                <t t-if="inv.invoice_payment_term_id.name != 'Pago inmediato'">
+                                                    <span>Credito</span>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="page">
+                            <div class="productos_ccf">
+                                <t t-set="ventas_no_sujetas" t-value="0"></t>
+                                <t t-set="ventas_exentas" t-value="0"></t>
+                                <t t-set="ventas_afectas" t-value="0"></t>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="inv.invoice_line_ids" t-as="line">
+                                            <tr>
+                                                <td><span t-field="line.product_id.name" style="margin-right:6px;"/><span t-esc="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/></td>
+                                                <td><span t-esc="line.quantity"></span></td>
+                                                <!--price unit-->
+                                                <td>
+                                                    <t t-foreach="inv.fiscal_position_id" t-as="f">
+                                                        <t t-if="f.name != 'Ventas Exentas' or f.name != 'Ventas No Sujetas' or f.name != 'Internacionales'">
+                                                            <span t-esc="line.price_unit * 1.13" t-options='{"widget": "float", "precision": 2}'/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="line.price_unit" t-options='{"widget": "float", "precision": 2}'/>
+                                                        </t>
+                                                    </t>
+                                                </td>
+                                                <td t-foreach="inv.fiscal_position_id" t-as="f" >
+                                                    <t t-if="f.name == 'Ventas No Sujetas'">
+                                                        <span  t-esc="line.price_subtotal"
+                                                               t-options='{"widget": "float", "precision": 2}'/>
+                                                        <t t-set="ventas_no_sujetas" t-value="ventas_no_sujetas + line.price_subtotal"></t>
+                                                    </t>
+                                                </td>
+                                                <td t-foreach="inv.fiscal_position_id" t-as="f">
+                                                    <t t-if="f.name == 'Ventas Exentas'">
+                                                        <span  t-esc="l.price_subtotal"  t-options='{"widget": "float", "precision": 2}'/>
+                                                        <t t-set="ventas_exentas" t-value="ventas_exentas + l.price_subtotal"></t>
+                                                    </t>
+                                                </td>
+                                                <td t-foreach="inv.fiscal_position_id" t-as="f">
+                                                    <t t-if="f.name != 'Ventas Exentas' or f.name != 'Ventas No Sujetas'">
+                                                        <t t-if="f.name != 'Ventas Exentas' or f.name != 'Ventas No Sujetas' or f.name != 'Internacionales'">
+                                                            <span t-esc="line.price_subtotal * 1.13" t-options='{"widget": "float", "precision": 2}'/>
+                                                        </t>
+                                                        <t t-if="f.name == 'Internacionales'">
+                                                            <span t-esc="l.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                                                        </t>
+                                                        <t t-if="f.name == 'Ventas Exentas' or f.name == 'Ventas No Sujetas'">
+                                                        </t>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="footer_tm_ccf last-page">
+                                <div class="footer_container">
+                                    <div class="footer_left">
+                                        <p><span t-field="inv.num_word"></span></p>
+                                    </div>
+                                    <div class="footer_right">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                        <t t-if="ventas_no_sujetas > 0">
+                                                            <span t-esc="ventas_no_sujetas"/>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                        <t t-if="ventas_exentas > 0">
+                                                            <span t-esc="ventas_exentas"/>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-foreach="inv.fiscal_position_id" t-as="f">
+                                                            <t t-if="f.name != 'Ventas Exentas' or f.name != 'Ventas No Sujetas' or f.name != 'Internacionales'">
+                                                                <p class="sumas" t-esc="float(inv.amount_untaxed * 1.13)" t-options='{"widget": "float", "precision": 2}'/>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <p class="sumas" t-esc="inv.amount_untaxed" t-options='{"widget": "float", "precision": 2}'></p>
+                                                            </t>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                        <t t-if="ventas_no_sujetas > 0">
+                                                            <span t-esc="ventas_no_sujetas"/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span class="punto">.</span>
+                                                        <t t-if="ventas_exentas > 0">
+                                                            <span t-esc="ventas_exentas"/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <p t-esc="float(inv.amount_total)"
+                                                           t-options='{"widget": "float", "precision": 2}'/>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

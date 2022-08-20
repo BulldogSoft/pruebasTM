@@ -1,0 +1,60 @@
+<?xml version = "1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_caja_chica_tm_form" model="ir.ui.view">
+        <field name="name">view.caja.chica.tm.form</field>
+        <field name="model">caja.chica</field>
+        <field name="arch" type="xml">
+            <form string="Registro de Caja Chica">
+                <header>
+                    <button name="button_validate" string="Validar" states="draft" class="oe_highlight" type="object"/>
+                    <button name="button_cancel" string="Cancelar" states="draft" class="btn btn-danger" type="object"/>
+                    <button name="button_draft" string="Regresar a Borrador" states="open" class="btn btn-warning" type="object"/>
+                    <button name="button_done" string="Hecho" states="open" class="oe_highlight" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,done,cancel"/>
+                    </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group name="datos">
+                        <group name="datos_left">
+                            <field name="company_id" invisible="1"/>
+                            <field name="partner_id" attrs="{'readonly':[('state','!=','draft')]}" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="fecha" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="total" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                    </group>
+                    <field name="concepto" placeholder="Concepto..." nolabel="1" height="50"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <record id="view_caja_chica_tm_tree" model="ir.ui.view">
+        <field name="name">view.caja.chica.tm.tree</field>
+        <field name="model">caja.chica</field>
+        <field name="arch" type="xml">
+            <tree string="Registro de Caja Chica">
+                <field name="name"/>
+                <field name="fecha"/>
+                <field name="partner_id"/>
+                <field name="total"/>
+            </tree>
+        </field>
+    </record>
+
+        <record id="caja_chica_tm_action" model="ir.actions.act_window">
+        <field name="name">Caja Chica</field>
+        <field name="res_model">caja.chica</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+	<!--  Menu Items-->
+    <menuitem name="Registro de Caja Chica" id="caja_chica_tm_registro" parent="account.menu_finance_payables" action="caja_chica_tm_action" sequence="2"/>
+</odoo>
+

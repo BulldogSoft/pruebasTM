@@ -1,0 +1,3 @@
+Version 14.0.0.1:
+	- In subscription default branch will be current user's branch. 
+	- Fixed access rights issue of user when See subscription is given in user configuration.

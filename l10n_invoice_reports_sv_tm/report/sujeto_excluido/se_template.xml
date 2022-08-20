@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="reporte_invoice_sujeto_excluido">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="inv">
+
+                    <div class="header">
+                        <div class="pre_header_tm_se">
+                        </div>
+                        <div class="header_info_tm_se container">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td><span t-field="inv.invoice_date" t-options='{"format": "dd/MM/yyyy"}'></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><span t-esc="inv.partner_id.name"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span t-field="inv.partner_id.street"></span></td>
+                                        <td>
+                                            <span t-field="inv.partner_id.phone"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span t-field="inv.partner_id.nit"></span></td>
+                                        <td><span t-field="inv.partner_id.dui"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="productos_se">
+                            <t t-set="ventas_no_sujetas" t-value="0"></t>
+                            <t t-set="ventas_exentas" t-value="0"></t>
+                            <t t-set="ventas_afectas" t-value="0"></t>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="inv.invoice_line_ids" t-as="line">
+                                        <tr>
+                                            <td><span t-field="line.product_id.name" style="margin-right:6px;"/><span t-esc="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/></td>
+                                            <td><span t-esc="line.quantity"></span></td>
+                                            <!--price unit-->
+                                            <td>
+                                                <t t-foreach="inv.fiscal_position_id" t-as="f">
+                                                    <t t-if="f.name != 'Ventas Exentas' or f.name != 'Ventas No Sujetas' or f.name != 'Internacionales'">
+                                                        <span t-esc="line.price_unit * 1.13" t-options='{"widget": "float", "precision": 2}'/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <span t-esc="line.price_unit" t-options='{"widget": "float", "precision": 2}'/>
+                                                    </t>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <span t-esc="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="footer_tm_se last-page">
+                            <div class="footer_container">
+                                <div class="footer_left">
+                                    <p><span t-field="inv.num_word"></span></p>
+                                </div>
+                                <div class="footer_right">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span class="punto">.</span>
+                                                </td>
+                                                <td>
+                                                    <span class="sumas" t-esc="float(inv.amount_untaxed * 1.13)" t-options='{"widget": "float", "precision": 2}'/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <span class="punto">.</span>
+                                                    <span t-esc="inv.iva_calculo" t-options='{"widget": "float", "precision": 2}'></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <span class="punto">.</span>
+                                                    <span class="sumas" t-esc="float(inv.amount_untaxed)" t-options='{"widget": "float", "precision": 2}'/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <span t-esc="float(inv.amount_total)"
+                                                       t-options='{"widget": "float", "precision": 2}'/>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

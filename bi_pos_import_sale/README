@@ -1,0 +1,13 @@
+=> 14.0.0.1 : Improved an index as per latest improvements.
+
+Version 14.0.0.2 : (14-07-21)
+		- Update get_orders_domain() method in js. 
+
+Version 14.0.0.3 : (21-08-21)
+		- Solved issue of add product after opening import sale.
+
+Version 14.0.0.4 : (13-10-21)
+		- Solved issue of fetch sale order id in pos order after import sale order.
+
+Version 14.0.0.5 : (02-11-21)
+		- import sale order with pricelist and fiscal position

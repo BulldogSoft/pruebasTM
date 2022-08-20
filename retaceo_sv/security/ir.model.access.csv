@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_retaceo_poliza_all,access.retaceo.poliza.all,retaceo_sv.model_retaceo_poliza,,1,1,1,1
+access_retaceo_internacion,access_retaceo_internacion,model_retaceo_internacion,,1,1,1,1
+access_retaceo_linea,access_retaceo_linea,model_retaceo_linea,,1,1,1,1
+access_retaceo_nacionales,retaceo.nacionales.user,model_retaceo_nacionales,,1,1,1,1
+access_average_landed_cost_lines,average.landed.cost.lines.user,model_average_landed_cost_lines,,1,1,1,1
+

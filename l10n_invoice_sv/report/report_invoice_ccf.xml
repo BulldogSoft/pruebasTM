@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <template id="report_invoice_ccf">
+      <t t-call="web.html_container">
+        <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+        <div class="header">
+          
+        </div>
+        <div t-att-data-oe-model="o._name" t-att-data-oe-id="o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" class="page article">
+          <style type="text/css">
+            .mytable {
+              border-collapse: collapse;
+              width: 100%;
+              }
+              .tabla-trh td {
+              font-size: 29px;
+              }
+            </style>
+
+          <div class="row">
+            <table class="mytable tabla-trh">                      <!--fecha-->
+              <tr>
+                <td  width="7.81%" height="56px" style="color: white;"> . </td>
+                <td width="52.60%"  class="text-left">
+                  <span t-field="o.partner_id"/>
+                </td>
+                <td width="6.25%" class="text-center"> </td>
+                <td width="32.81%" class="text-left">
+                  <span t-field="o.date_invoice"/>
+                </td>
+              </tr>
+            </table>
+            </div>
+
+          <div class="row">
+            <table class="mytable tabla-trh" >
+              <tr>
+                <td  width="9.82%" height="56px" style="color: white;"> . </td>
+                <td width="50.52%">
+                  <span t-if="o.partner_id.street">
+                    <span t-field="o.partner_id.street"/>
+                  </span>
+                  <span t-if="o.partner_id.street2">
+                    , <span t-field="o.partner_id.street2"/>
+                  </span>
+                </td>
+                 <td  width="11.42%" style="color: white;"> . </td>
+                 <td  width="27.6%">
+                   <span t-field="o.partner_id.nrc"/>
+                 </td>
+              </tr>
+            </table>
+            </div>
+
+          <div class="row">
+            <table class="mytable tabla-trh" >
+              <tr>
+                <td  width="9.89%" height="40px" style="color: white;"> . </td>
+                <td width="50.52%"> <span t-field="o.partner_id.munic_id"/> </td>
+                <td width="5.2%"> </td>
+                <td width="33.85%"> <span t-field="o.partner_id.nit"/> </td>
+              </tr>
+            </table>
+            </div>
+
+          <div class="row">
+            <table class="mytable tabla-trh" >
+              <tr>
+                <td  width="26.04%%" height="56px" style="color: white;"> . </td>
+                <td width="34.89%"> <span t-field="o.partner_id.state_id"/> </td>
+                <td width="5.2%"> </td>
+                <td width="33.85%" rowspan="2"> <span t-field="o.partner_id.giro"/> </td>
+              </tr>
+
+              <tr>
+                <td  width="26.04%" height="56px" style="color: white;"> . </td>
+                <td width="34.89%"> <span t-field="o.payment_term_id"/> </td>
+                <td width="5.2%"> </td>
+              </tr>
+            </table>
+          </div>
+
+
+          <div class="row">
+            <table class="mytable tabla-trh" >
+              <tr>
+                <td  width="36.45%" height="56px" style="color: white;">. </td>
+                <td width="23.95%"> </td>
+                <td width="16.6%"> </td>
+                <td width="22.91%"> </td>
+              </tr>
+            </table>
+            </div>
+          <br/>
+          <br/>
+          <br/>
+
+           <!-- Lineas de Pedido -->
+
+          <style>
+            #tabla-3
+            {
+            width: 100%;
+            }
+
+            #tabla-3 td
+            {
+            font-size: 29px;
+            }
+            #tabla-3 th{
+            }
+
+          </style>
+
+          <div class="row">
+            <table id="tabla-3" class="text-center">
+              <thead>
+                <tr>
+                  <th style="width:7.81%; height: 44px;"> </th>
+                  <th style="width:47.39%; padding: 18px 5px"> </th>
+                  <th style="width:7.81%"> </th>
+                  <th style="width:10.41%"> </th>
+                  <th style="width:10.41%"> </th>
+                  <th style="width:15.62%"> </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr t-foreach="o.invoice_line_ids" t-as="l">
+                  <td>
+                    <span t-field="l.quantity"/>
+                    <span t-field="l.uom_id"  groups="product.group_uom"/>
+                  </td>
+                  <td class="text-justify">
+                    <span t-field="l.name"/>
+                  </td>
+
+                  <td class="text-left">
+                    <span t-field="l.price_unit" t-options='{"widget": "float", "precision": 2}'/>
+                  </td>
+
+                  <td class="text-left" t-foreach="o.fiscal_position_id" t-as="f" >
+                    <span t-if="f.name == 'Ventas No Sujetas'" t-esc="l.price_subtotal"
+                          t-options='{"widget": "float", "precision": 2}'/>
+                  </td>
+                  <td class="text-left" t-foreach="o.fiscal_position_id" t-as="f">
+                    <span t-if="f.name == 'Ventas Exentas'" t-esc="l.price_subtotal"/>
+                  </td>
+
+                  <td class="text-left" t-foreach="o.fiscal_position_id" t-as="f">
+                    <span t-if="f.name != 'Ventas Exentas' and  f.name != 'Ventas No Sujetas'"
+                          t-esc="l.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        <div class="footer">
+          <style>
+            #tabla-t
+            {
+            width: 100%;
+            }
+            #tabla-t td
+            {
+            font-size: 24px;
+            }
+          </style>
+
+        <div class="row">
+          <table id="tabla-t" class="text-left">
+            <tr>
+              <td colspan="2" rowspan="3" style="width:55.2%; padding-left: 90px" height="40px">
+                <span t-field="o.amount_text"/>
+              </td>
+              <td width="7.81%" style="color: white">.</td>
+              <td width="10.41%" t-foreach="o.fiscal_position_id" t-as="f">
+                <span t-if="f.name == 'Ventas No Sujetas'"
+                      t-esc="o.amount_untaxed"
+                      t-options='{"widget": "float", "precision": 2}'/>
+              </td>
+              <td width="10.41%" t-foreach="o.fiscal_position_id" t-as="f">
+                <span t-if="f.name == 'Ventas Exentas'"
+                      t-esc="o.amount_untaxed"
+                      t-options='{"widget": "float", "precision": 2}'/>
+              </td>
+              <td width="15.62%">
+                <span t-foreach="o.fiscal_position_id" t-as="f">
+                  <span t-if="f.name != 'Ventas Exentas' and  f.name != 'Ventas No Sujetas'"
+                        t-esc="o.amount_untaxed" t-options='{"widget": "float", "precision": 2}'/>
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="color: white" height="40px">.</td>
+              <td></td>
+              <td></td>
+              <td>
+                <span t-foreach="o.tax_line_ids" t-as="l">
+                  <span t-if="l.name == 'IVA 13% Ventas'">
+                    <span t-esc="o.amount_untaxed * 0.13" t-options='{"widget": "float", "precision": 2}'/>
+                  </span>
+
+                  <span t-else="l.name != 'IVA 13% Ventas'">
+                    <span />
+                  </span>
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="color: white" height="40px">.</td>
+              <td></td>
+              <td></td>
+              <td>
+                <span t-foreach="o.fiscal_position_id" t-as="f">
+                  <span t-if="f.name == 'Gran Contribuyente' and o.amount_untaxed >= 100">
+                    <span t-esc="(o.amount_total) + (o.amount_untaxed * 0.01)" t-options='{"widget": "float", "precision": 2}'/>
+                  </span>
+                  <span t-if="f.name == 'Ventas Locales' or f.name == 'Ventas Internacionales'"
+                        t-esc="o.amount_total" t-options='{"widget": "float", "precision": 2}'>
+                  </span>
+                  <span t-else="f.name == 'Ventas Exentas' or  f.name == 'Ventas No Sujetas'">
+                  </span>
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="color: white" height="40px">.</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <span t-foreach="o.tax_line_ids" t-as="l">                                 <!--retencion-->
+                  <span t-if="l.name == 'Retención 1%'">
+                    <span t-esc="o.amount_untaxed * 0.01" t-options='{"widget": "float", "precision": 2}'/>
+                  </span>
+                  <span t-else="l.name != 'Retención 1%'">
+                    <span  />
+                  </span>
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="color: white" height="40px">.</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <span t-foreach="o.fiscal_position_id" t-as="f">                              <!--ventas no sujetas-->
+                  <span t-if="f.name == 'Ventas No Sujetas'" t-esc="o.amount_total"
+                        t-options='{"widget": "float", "precision": 2}'/>
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="color: white" height="40px">.</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <span t-foreach="o.fiscal_position_id" t-as="f">                                  <!--ventas exentas-->
+                  <span t-if="f.name == 'Ventas Exentas'" t-esc="o.amount_total"
+                        t-options='{"widget": "float", "precision": 2}'/>
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+            <td style="color: white" height="40px">.</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <span t-esc="float(o.amount_total)" t-options='{"widget": "float", "precision": 2}'/>                                 <!--total-->
+            </td>
+            </tr>
+          </table>
+         </div>
+        </div>
+
+
+        </div>
+      </t>
+    </template>
+  </data>
+</odoo>

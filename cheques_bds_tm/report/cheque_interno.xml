@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="cheque_tm">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.html_container">
+                    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                    <div class="header">
+                        <div class="cheque cheque_gg">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="cheq_fecha"><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> <span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                        <td class="cheq_amount"><span>$****<span t-esc="o.amount" t-options='{"widget": "float", "precision": 2}'></span>****</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text_up chq_nomb"><span t-esc="o.partner_id.name" ></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text_up chq_am_tx"><span>****<span t-esc="o.amount_text" ></span>****</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <div class="cheque_info">
+                                <div class="cheque_cuadro">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td><span>Cheque Número</span></td>
+                                                <td><span t-esc="o.num_cheque"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Lugar y Fecha</span></td>
+                                                <td><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> de <span t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Por el monto de</span></td>
+                                                <td><span>$****<span t-esc="o.amount"></span>****</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span></span></td>
+                                                <td><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>En concepto de</span></td>
+                                                <td><span t-esc="o.cheque_concepto"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="cheque_lines">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <t t-if="o.reconciled_invoice_ids">
+                                                        <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                            <span t-esc="fac.name"></span>/
+                                                        </t>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <span t-esc="o.ref"></span>
+                                                    </t>
+
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th><span>Cuenta Contable</span></th>
+                                                <th><span>Concepto</span></th>
+                                                <th><span>Debe</span></th>
+                                                <th><span>Haber</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="o.move_id.line_ids" t-as="move">
+                                                <tr>
+                                                    <td><span t-esc="move.account_id.name"></span></td>
+                                                    <td><span t-esc="move.name"></span></td>
+                                                    <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer container">
+                            <div class="firmas_po row last-page">
+                                <div class="col-4 text-center">
+                                    <div class="linea"><span>F.</span></div>
+                                    <div class="texto">
+                                        <span>Elaborado por:</span>
+                                        <br/>
+                                        <span>Analista de pagos</span>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <div class="linea"><span>F.</span></div>
+                                    <div class="texto">
+                                        <span>Revisado por:</span>
+                                        <br/>
+                                        <span>Jefe(a) de Pagos</span>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <div class="linea"><span>F.</span></div>
+                                    <div class="texto">
+                                        <span>Autorizado por:</span>
+                                        <br/>
+                                        <span>Director Financiero</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="recibi">
+                                <div class="conforme">
+                                    <strong><p>RECIBI CONFORME</p></strong>
+                                </div>
+                                <table class="tabla_recibi">
+                                    <thead>
+                                        <tr>
+                                            <th><span class="punto">.</span></th>
+                                            <th><span class="punto">.</span></th>
+                                            <th><span class="punto">.</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th><span>Nombre y apellido</span></th>
+                                            <th><span>DUI</span></th>
+                                            <th><span>Firma</span></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="logos row text-center">
+                                <div class="logo_gg col-4">
+                                    <img src='/web/binary/company_logo'/>
+                                </div>
+                                <div class="company col-4">
+                                    <h4 t-esc="o.company_id.name"/>
+                                </div>
+                                <div class="logo_lf col-4">
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,576 @@
+.agricola{
+    .cheque{
+        letter-spacing:1.4px;
+        padding-left: 120px;
+        text-transform: uppercase;
+        table{
+            width: 100%;
+            tbody{
+                tr{
+                    &:first-child{
+                        td{
+                            padding-bottom:20px;
+                            }
+                    }
+                    &:nth-child(2){
+                        td{
+                            padding-bottom:15px;
+                            }
+                    }
+                    td{
+                        padding: 7px;
+                        font-size:15px;
+                        .chq_year{
+                            padding-left:170px;
+                        }
+                    }
+                  .chq_amount{
+                        width:30%;
+                    }
+                  .text_up{
+                    padding-top: 9px;
+                  }
+                }
+            }
+        }
+    }
+    .middle_cheque{
+        width:100%;
+        height:300px;
+    }
+    .footer_cheque{
+        .header_concepto{
+            width:70%;
+            height:150px;
+            padding: 25px;
+            padding-top: 25px;
+            padding-left: 40px;
+            span{
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+        }
+        table{
+           width:80%;
+           margin-left:2.3%;
+           margin-top: 15px;
+           tbody{
+                tr{
+                    td{
+                         padding:7px;
+                         span{
+                            font-size: 14px;
+                         }
+                         &:first-child{
+                            width:17%;
+                         }
+                         &:nth-child(2){
+                            width:53%
+                         }
+                         &:nth-child(3){
+                            width:15%;
+                            text-align:right;
+                         }
+                         &:nth-child(4){
+                            width:15%;
+                            text-align:right;
+                         }
+                    }
+                }
+           }
+        }
+    }
+}
+.bac{
+    .cheque{
+        letter-spacing:1.2px;
+        padding-left: 78px;
+        text-transform: uppercase;
+        table{
+            width: 99%;
+            tbody{
+                tr{
+                    &:first-child{
+                        td{
+                            padding-top:3px;
+                            padding-bottom:16px;
+                            }
+                    }
+                    &:nth-child(2){
+                        td{
+                            padding-bottom:12px
+                        }
+                    }
+                    td{
+                        padding: 8px;
+                        font-size:15px;
+                        .chq_year{
+                            padding-left:125px;
+                        }
+                    }
+                  .chq_amount{
+                        width:25%;
+                    }
+                  .text_up{
+                    padding-top: 9px;
+
+                  }
+                  .chq_fecha{
+                    padding-left: 100px;
+                  }
+                }
+            }
+        }
+    }
+    .middle_cheque{
+        width:100%;
+        height:280px;
+    }
+    .footer_cheque{
+
+        .header_concepto{
+            width:70%;
+            margin-left: 40px;
+            height:120px;
+            padding: 25px;
+            padding-top: 25px;
+            span{
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+        }
+        table{
+           width:88%;
+           margin-left:2.5%;
+           margin-top: 15px;
+           thead{
+                tr{
+
+                    font-weight: bold;
+                    td{
+                        padding-left: 5px;
+                    }
+                }
+           }
+           tbody{
+                tr{
+                    td{
+
+                        padding:7px;
+                        span{
+                            font-size: 14px;
+                        }
+                        &:first-child{
+                           width:17%;
+                        }
+                        &:nth-child(2){
+                           width:53%
+                        }
+                        &:nth-child(3){
+                           width:15%;
+                        }
+                        &:nth-child(4){
+                           width:15%;
+                        }
+                    }
+                }
+           }
+        }
+    }
+
+
+}
+.davivienda{
+    .cheque{
+        text-transform: uppercase;
+        letter-spacing:1.2px;
+        padding-left: 85px;
+        padding-top:5px;
+        table{
+            width: 99%;
+            tbody{
+                tr{
+                    &:first-child{
+
+                        td{
+                            padding-bottom:14px;
+                        }
+                    }
+                    td{
+                        padding: 10px;
+                        padding-top:9px;
+                        font-size:15px;
+                        .chq_year{
+                            padding-left:10px;
+                        }
+
+                    }
+                  .chq_amount{
+                        width:25%;
+                        padding-left:3px;
+                    }
+                  .text_up{
+                    padding-top: 9px;
+                  }
+                  .chq_fecha{
+                    padding-left: 125px;
+                  }
+                }
+            }
+        }
+    }
+    .middle_cheque{
+        width:100%;
+        height:280px;
+    }
+    .footer_cheque{
+        .header_concepto{
+            width:70%;
+            margin-right: 20%;
+            height:120px;
+            padding: 25px;
+            padding-top: 25px;
+            span{
+                font-size: 16px;
+                text-transform: uppercase;
+                padding-left: 50px;
+            }
+        }
+        table{
+           width:89%;
+           margin-left: 4%;
+           margin-top: 15px;
+
+           thead{
+                tr{
+                    font-weight: bold;
+                    td{
+
+                        padding-left: 5px;
+                    }
+                }
+           }
+           tbody{
+                tr{
+                    td{
+                        &:first-child{
+                           width:17%;
+                        }
+                        &:nth-child(2){
+                           width:53%
+                        }
+                        &:nth-child(3){
+                           width:15%;
+                        }
+                        &:nth-child(4){
+                           width:15%;
+                        }
+
+                        padding:7px;
+                        span{
+                            font-size: 14px;
+                        }
+                    }
+                }
+           }
+        }
+    }
+
+}
+
+.proamerica{
+    .cheque{
+        text-transform: uppercase;
+        letter-spacing:1.3px;
+        padding-left: 84px;
+        table{
+            width: 99%;
+            tbody{
+                tr{
+                    &:first-child{
+                        td{
+                            padding-top:2px;
+                            padding-bottom:18px;
+                        }
+                    }
+                    &:nth-child(2){
+                        td{
+                            padding-bottom: 14px;
+                        }
+                    }
+                    td{
+                        padding: 7.5px;
+                        padding-bottom:10px;
+                        font-size:15px;
+                        .chq_year{
+                            padding-left:10px;
+                        }
+                    }
+                  .chq_amount{
+                        width:30%;
+                        vertical-align:top;
+                        padding-top:0;
+                    }
+                  .text_up{
+                    padding-top: 9px;
+                  }
+                  .chq_nomb{
+                    padding-left:15px;
+                  }
+                  .chq_fecha{
+                    padding-left:20px
+                  }
+
+                }
+            }
+        }
+    }
+    .middle_cheque{
+        width:100%;
+        height:280px;
+    }
+    .footer_cheque{
+        .header_concepto{
+            width:70%;
+            margin: auto;
+            margin-left: 4%;
+            height:120px;
+            padding: 25px;
+            padding-top: 25px;
+            span{
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+        }
+        table{
+           width:89%;
+           margin-left:4%;
+           margin-top: 15px;
+
+           thead{
+
+                tr{
+
+                    font-weight: bold;
+                    td{
+
+                        padding-left: 5px;
+                    }
+                }
+           }
+           tbody{
+                tr{
+                    td{
+
+                        padding:7px;
+                        span{
+                            font-size: 14px;
+                        }
+                        &:first-child{
+                           width:17%;
+                        }
+                        &:nth-child(2){
+                           width:53%;
+                        }
+                        &:nth-child(3){
+                           width:15%;
+                        }
+                        &:nth-child(4){
+                           width:15%;
+                        }
+                    }
+                }
+           }
+        }
+    }
+}
+.atlantida{
+    .cheque{
+        text-transform: uppercase;
+        letter-spacing:1.3px;
+        padding-left: 65px;
+        padding-top:6px;
+        table{
+            margin-top: -3px;
+            width: 99%;
+            tbody{
+                tr{
+                     &:first-child{
+                       td{
+                            padding-bottom:21px;
+                        }
+                     }
+                    td{
+                        padding: 10px;
+                        font-size:15px;
+                        .chq_year{
+                            padding-left:10px;
+                        }
+                    }
+                  .chq_amount{
+                        width:27%;
+                    }
+                  .text_up{
+                    padding-top: 8px;
+                  }
+                  .chq_fecha{
+                    padding-left: 120px;
+                    padding-bottom: 12px;
+                  }
+                }
+            }
+        }
+    }
+     .middle_cheque{
+        width:100%;
+        height:280px;
+    }
+    .footer_cheque{
+      .header_concepto{
+            width:70%;
+            margin: auto;
+            margin-left: 11%;
+            height:120px;
+            padding: 15px;
+            padding-top: 6px;
+            span{
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+        }
+        table{
+           width:89%;
+           margin-left:2.5%;
+           margin-top: 15px;
+
+           thead{
+
+                tr{
+                    font-weight: bold;
+                    td{
+
+                        padding-left: 5px;
+                    }
+                }
+           }
+           tbody{
+                tr{
+                    td{
+
+                        padding:7px;
+                        span{
+                            font-size: 14px;
+                        }
+                        &:first-child{
+                           width:17%;
+                        }
+                        &:nth-child(2){
+                           width:53%;
+                        }
+                        &:nth-child(3){
+                           width:15%;
+                           text-align: left;
+                        }
+                        &:nth-child(4){
+                           width:15%;
+                           text-align: left;
+                        }
+                    }
+                }
+           }
+        }
+    }
+}
+.cuscatlan{
+    .cheque{
+        text-transform: uppercase;
+        letter-spacing:1.3px;
+        padding-left: 80px;
+        padding-top:5px;
+        table{
+            width: 99%;
+            tbody{
+                tr{
+                   &:first-child{
+                       td{
+                            padding-bottom:16px;
+                        }
+                     }
+                    td{
+                        padding: 9px;
+                        font-size:15px;
+                        .chq_year{
+                            padding-left:10px;
+                        }
+                    }
+                  .chq_amount{
+                        width:25%;
+                    }
+                  .text_up{
+                    padding-top: 9px;
+                  }
+                  .chq_fecha{
+                    padding-left: 10px;
+                  }
+                  .chq_nomb{
+                    padding-left: 70px;
+                  }
+                }
+            }
+        }
+    }
+    .middle_cheque{
+        width:100%;
+        height:280px;
+    }
+    .footer_cheque{
+        .header_concepto{
+            width:70%;
+            margin-left: 8%;
+            height:120px;
+            padding: 25px;
+            padding-top: 40px;
+            span{
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+        }
+        table{
+           width:80%;
+           margin-left:2.3%;
+           margin-top: 15px;
+           thead{
+                tr{
+                    font-weight: bold;
+                    td{
+                        padding-left: 5px;
+                    }
+                }
+           }
+           tbody{
+                tr{
+                    td{
+                        padding:7px;
+                        span{
+                            font-size: 14.5px;
+                        }
+                        &:first-child{
+                           width:26%;
+                        }
+                        &:nth-child(2){
+                           width:50%;
+                        }
+                        &:nth-child(3){
+                           width:10%;
+                           text-align:left;
+                        }
+                        &:nth-child(4){
+                           width:12%;
+                           text-align:right;
+                        }
+                    }
+                }
+           }
+        }
+    }
+}

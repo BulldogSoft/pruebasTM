@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+quedan_register_pro_group_account_user,quedan.register.pro,model_quedan_register_pro,account.group_account_user,1,1,1,1
+quedan_register_pro_group_account_manager,quedan.register.pro,model_quedan_register_pro,account.group_account_manager,1,1,1,1
+quedan_invoice_group_account_user,quedan.invoice,model_quedan_invoice,account.group_account_user,1,1,1,1
+quedan_invoice_group_account_manager,quedan.invoice,model_quedan_invoice,account.group_account_manager,1,1,1,1
+
+
+
+
+
+

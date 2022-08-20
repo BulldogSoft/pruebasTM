@@ -1,0 +1,9 @@
+Version 14.0.0.1:
+	- Added branch flow in hr.payslip. 
+	- Fixed traceback issue generated on creating contracts. 
+
+14.0.0.2 (8-9-2021) : when create accouting etries pass branch on it if given in expense record.
+
+14.0.0.3 (10-9-2021) : Improvements on tree view added branch field in all tree views.
+
+14.0.0.4 (23-9-2021) : Added warning if branch is change from the employee form.

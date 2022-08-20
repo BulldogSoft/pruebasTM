@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_invoice_form_sv" model="ir.ui.view">
+            <field name="name">Amount to Text</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//form/header" position="inside">
+                    <button
+                            name="print_report" type="object"
+                            string="Quedan"
+                            attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('move_type', '!=', 'in_invoice')]}"/>
+
+                    <button
+                            name="print_report_se"
+                            type="object"
+                            string="Sujeto Excluido"
+                            attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('move_type', '!=', 'in_invoice')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

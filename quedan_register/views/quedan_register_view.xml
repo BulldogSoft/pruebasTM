@@ -1,0 +1,50 @@
+<?xml version = "1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherited employee form view -->
+    <record id="view_quedan_register_form" model="ir.ui.view">
+        <field name="name">view.quedan.register.form</field>
+        <field name="model">quedan.register</field>
+        <field name="arch" type="xml">
+            <form string="Registro de Quedan">
+                <sheet>
+                    <group name="datos">
+                        <group name="datos_left" string="Datos">
+                            <field name="fecha"/>
+                            <field name="empresa"/>
+                             <field name="no_factura"/>
+                            <field name="no_quedan"/>
+                            <field name="entrega"/>
+                            <field name="recibe"/>
+                        </group>
+                    </group>
+                </sheet>
+               </form>
+        </field>
+    </record>
+
+        <record id="view_quedan_register_tree" model="ir.ui.view">
+        <field name="name">view.quedan.register.tree</field>
+        <field name="model">quedan.register</field>
+        <field name="arch" type="xml">
+            <tree string="Registro de Quedan">
+                <field name="fecha"/>
+                <field name="empresa"/>
+                <field name="no_factura"/>
+                <field name="no_quedan"/>
+                <field name="entrega"/>
+                <field name="recibe"/>
+            </tree>
+        </field>
+    </record>
+
+        <record id="quedan_reports_action" model="ir.actions.act_window">
+        <field name="name">Registro de Quedan</field>
+        <field name="res_model">quedan.register</field>
+       	<!--  <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+	<!--  Menu Items-->
+    <menuitem name="Registro de Quedan" id="quedan_reports_menu" parent="account.menu_finance_receivables" action="quedan_reports_action" sequence="1"/>
+</odoo>

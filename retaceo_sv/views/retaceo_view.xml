@@ -1,0 +1,192 @@
+<odoo>
+    <data>
+        <record id="retaceo_sv_form_view" model="ir.ui.view">
+            <field name="name">retaceo form sv</field>
+            <field name="model">retaceo.poliza</field>
+            <field name="arch" type="xml">
+                <form string="Poliza">
+                    <header>
+                        <button name="button_progress" string="Validar" states="draft" class="oe_highlight" type="object"/>
+                        <button name="compute_landed_cost" string="Cargar Orden" states="draft" type="object" class="oe_highlight"/>
+                        <button name="button_validate" string="Actualizar Costo" states="progress" class="oe_highlight" type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="No. de Poliza"/>
+                            </h1>
+                        </div>
+                        <group name="datos">
+                            <group name="datos_left">
+                                <field name="order_id" options="{'no_create': True}" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="descripcion"/>
+                                <field name="guia_bl" />
+                                <field name="metodo_division"/>
+                                <field name="fecha"/>
+                                <field name="tipo_importacion"/>
+                            </group>
+                            <group name="datos_rigth">
+                                <field name="journal_id"/>
+                                <field name="move_id"/>
+                                <field name="incoterm_id"/>
+                                <field name="fecha_zarpe"/>
+                                <field name="fecha_entrada"/>
+                                <field name="aduanas" invisible="1"/>
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Gastos de Internación">
+                                <field name="cost_lines">
+                                    <tree string="Gastos de Internación" editable="bottom">
+                                        <field name="invoice_id" options="{'no_create': True}"/>
+                                        <field name="reference" />
+                                        <field name="total"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="invoice_id"/>
+                                            </group>
+                                            <group>
+                                                <field name="reference"/>
+                                                <field name="total"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="amount_total" widget="monetary" class="oe_subtotal_footer oe_right"/>
+                                </group>
+                            </page>
+
+                            <page string="Gastos Nacionales">
+                                <field name="gastos_nacionales">
+                                    <tree string="Gastos Nacionales" editable="bottom">
+                                        <field name="invoice_id" options="{'no_create': True}"/>
+                                        <field name="reference"/>
+                                        <field name="total"/>
+                                    </tree>
+                                    <form string="Gastos Nacionales">
+                                        <group>
+                                            <group>
+                                                <field name="invoice_id"/>
+                                                <field name="reference"/>
+                                            </group>
+                                            <group>
+                                                <field name="total"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="total_gastos" widget="monetary"/>
+                                </group>
+                            </page>
+
+                            <page string="Ajustes de Valorización">
+                                <field name="valuation_adjustment_lines">
+                                    <tree string="Ajustes de Valorización" editable="bottom">
+                                        <field name="product_id" readonly="1"/>
+                                        <field name="quantity" readonly="1"/>
+                                        <field name="former_cost"/>
+                                        <field name="unit_price"/>
+                                        <field name="porrateo_int"/>
+                                        <field name="vcif"/>
+                                        <field name="porrateo_nac"/>
+                                        <field name="costo_total"/>
+                                        <field name="costo_unitario" invisible="1"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="product_id"/>
+                                                <field name="quantity"/>
+                                                <field name="former_cost_per_unit"/>
+                                                <field name="former_cost"/>
+                                            </group>
+                                            <group>
+                                                <field name="porrateo_int"/>
+                                                <field name="vcif"/>
+                                                <field name="porrateo_nac"/>
+                                                <field name="costo_total"/>
+                                                <field name="costo_unitario" invisible="1"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="amount_total" widget="monetary" invisible="1"/>
+                                    <field name="total_former_cost" widget="monetary" invisible="1"/>
+                                    <field name="total_porrateo_int" widget="monetary" invisible="1"/>
+                                    <field name="total_vicf" widget="monetary" invisible="1"/>
+                                    <button colspan="2" name="compute_average_landed_cost" string="Calcular Costo"
+                                            type="object"/>
+
+                                </group>
+                                <field name="avg_landed_cost_lines">
+                                    <form string="Calculo de Costo Unitario">
+                                        <group>
+                                            <group>
+                                                <field name="product_id" string="Producto"/>
+                                            </group>
+                                            <group>
+                                                <field name="average_landed_cost" string="Costo Unitario"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                    <tree string="Average Landed Cost Calculations" editable="bottom" create="0">
+                                        <field name="product_id" readonly="1" string="Producto"/>
+                                        <field name="quantity" invisible="1" string="Cantidad"/>
+                                        <field name="average_landed_cost" invisible="1" string="Costo Unitario"/>
+                                        <field name="additional_landed_cost_sum" invisible="1" string="Cantidad"/>
+                                        <field name="total_costo" invisible="0" string="Total"/>
+                                    </tree>
+                                </field>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--vista tree-->
+
+        <record id="retaceo_sv_tree_view" model="ir.ui.view">
+            <field name="name">retaceo tree view</field>
+            <field name="model">retaceo.poliza</field>
+            <field name="arch" type="xml">
+                <tree string="Poliza">
+                    <field name="name"/>
+                    <field name="order_id"/>
+                    <field name="incoterm_id"/>
+                    <field name="tipo_importacion"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Action View-->
+
+        <record id="action_retaceo_sv" model="ir.actions.act_window">
+            <field name="name">Poliza</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">retaceo.poliza</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+
+
+                </p>
+            </field>
+        </record>
+
+        <!--Menus-->
+        <menuitem id="retaceo_id" parent="purchase.menu_procurement_management" name="Poliza" action="action_retaceo_sv"
+                  sequence="4"/>
+    </data>
+</odoo>
+

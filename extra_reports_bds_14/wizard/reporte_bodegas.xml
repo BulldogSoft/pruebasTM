@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Reporte cero en TIENDA-->
+
+    <record id="wizard_report_bodega_cero_en_tienda" model="ir.ui.view">
+        <field name="name">reporte.bodegas</field>
+        <field name="model">reporte.cero.tienda</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Reporte cero en Tienda">
+                <group attrs="{'invisible':[('reporte_cero_printed','=',True)]}">
+                    <field name="reporte_cero_printed" invisible="1"></field>
+                    <field name="bodega_no_tiene"></field>
+                    <field name="bodega_si_tiene"></field>
+                </group>
+                <group attrs="{'invisible':[('reporte_cero_printed','=',False)]}">
+                    <field name="file_name" invisible="1"/>
+                    <field name="reporte_cero_file" readonly="1"  filename="file_name"/>
+                </group>
+                <footer>
+                    <button string='Generar Excel'  name="generar_reporte_cero"
+                            type="object" class="btn-primary" attrs="{'invisible':[('reporte_cero_printed','=',True)]}"/>
+                    <button string="Salir" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_cero_en_tienda" model="ir.actions.act_window">
+        <field name="name">Reporte cero en Tienda</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">reporte.cero.tienda</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_report_bodega_cero_en_tienda"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem  id="menu_print_reporte_cero_tienda" action="action_wizard_cero_en_tienda"
+               sequence="205" parent="stock.menu_warehouse_report" name="Reporte cero en tienda"/>
+
+
+
+    <!--Reporte cero en SALA-->
+    <record id="wizard_report_bodega_cero_en_sala" model="ir.ui.view">
+        <field name="name">reporte.bodegas</field>
+        <field name="model">reporte.cero.sala</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Reporte cero en Sala">
+                <group attrs="{'invisible':[('reporte_cero_printed','=',True)]}">
+                    <field name="reporte_cero_printed" invisible="1"></field>
+                    <field name="sucursal"></field>
+                </group>
+                <group attrs="{'invisible':[('reporte_cero_printed','=',False)]}">
+                    <field name="file_name" invisible="1"/>
+                    <field name="reporte_cero_file" readonly="1"  filename="file_name"/>
+                </group>
+                <footer>
+                    <button string='Generar Excel'  name="generar_reporte_cero"
+                            type="object" class="btn-primary" attrs="{'invisible':[('reporte_cero_printed','=',True)]}"/>
+                    <button string="Salir" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_cero_en_sala" model="ir.actions.act_window">
+        <field name="name">Reporte cero en Sala</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">reporte.cero.sala</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_report_bodega_cero_en_sala"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem  id="menu_print_reporte_cero_sala" action="action_wizard_cero_en_sala"
+               sequence="210" parent="stock.menu_warehouse_report" name="Reporte cero en Sala"/>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+
+    <!--id creation for visitor log-->
+        <record id="poliza_id" model="ir.sequence">
+          <field name="name">poliza_id</field>
+          <field name="padding">3</field>
+          <field name="prefix">POLIZA - </field>
+          <field name="code">poliza.code</field>
+        </record>
+
+        <record id="partida_retaceo_id" model="ir.sequence">
+          <field name="name">partida_retaceo_id</field>
+          <field name="padding">3</field>
+          <field name="prefix">RET - </field>
+          <field name="code">retaceo.code</field>
+        </record>
+
+    </data>
+</odoo>

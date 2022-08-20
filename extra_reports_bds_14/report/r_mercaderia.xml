@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="mercaderia_tm">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="header mercaderia_header">
+                        <div class="pre_header">
+                            <h3 t-esc="o.company_id.name"></h3>
+                            <h3>Recepción de mercaderia</h3>
+                        </div>
+                        <div class="header_body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="h_title">
+                                        <h3>Datos del ingreso</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="header_info row">
+                                <div class="col-6">
+                                    <table class="header_left">
+                                        <tbody>
+                                            <tr>
+                                                <td><span>Proveedor:</span></td>
+                                                <td><span t-esc="o.partner_id.name"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>No.CF:</span></td>
+                                                <td><span t-esc="o.ref"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Serie:</span></td>
+                                                <td><span t-esc="o.n_serie"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Fecha:</span></td>
+                                                <td><span t-field="o.invoice_date" t-options='{"format": "dd/MM/yyyy"}'></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Condición:</span></td>
+                                                <td>
+                                                    <t t-if="o.invoice_payment_term_id.name == 'Pago inmediato'">
+                                                        <span>Contado</span>
+                                                    </t>
+                                                    <t t-if="o.invoice_payment_term_id.name != 'Pago inmediato'">
+                                                        <span>Crédito</span>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Form Aduanero:</span></td>
+                                                <td><span t-esc="o.form_aduanero"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-6">
+                                    <table class="header_right">
+                                        <tbody>
+                                            <tr>
+                                                <td><span>Usuario:</span></td>
+                                                <td><span t-esc="o.user_id.name"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Voucher NO:</span></td>
+                                                <td><span t-esc="o.name"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>PO:</span></td>
+                                                <td><span t-esc="o.invoice_origin"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Fecha de ingreso:</span></td>
+                                                <td>
+                                                    <span t-field="o.fecha_ingreso" t-options='{"format": "dd/MM/yyyy"}'></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Fecha de Edición:</span></td>
+                                                <td>
+                                                    <span t-field="o.fecha_edicion" t-options='{"format": "dd/MM/yyyy"}'></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Impreso:</span></td>
+                                                <td>
+                                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+                <t t-call="web.internal_layout">
+                    <t t-set="suma_exentas" t-value="0"></t>
+                    <t t-set="suma_gravadas" t-value="0"></t>
+                    <t t-foreach="docs" t-as="o">
+                        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                        <div class="page">
+                            <table class="tabla_mercaderia">
+                                <thead>
+                                    <tr>
+                                        <th><span>Qty</span></th>
+                                        <th><span>NB</span></th>
+                                        <th><span>Descripción</span></th>
+                                        <th><span>Costo</span></th>
+                                        <th><span>Total</span></th>
+                                        <th><span>P.Siste</span></th>
+                                        <th><span>P.Suge</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                        <tr>
+                                            <td><span t-esc="int(line.quantity)"/></td>
+                                            <td><span t-esc="line.product_id.default_code"/></td>
+                                            <td><span t-esc="line.product_id.name"/></td>
+                                            <td><span>$</span><span t-esc="line.price_unit" t-options='{"widget": "float", "precision": 4}'></span></td>
+                                            <td><span>$</span><span t-esc="line.price_unit * line.quantity" t-options='{"widget": "float", "precision": 2}'/></td>
+                                            <td><span>$</span><span t-esc="line.product_id.lst_price" t-options='{"widget": "float", "precision": 2}'/></td>
+                                            <td><span>$</span><span t-esc="line.costo_sugerido" t-options='{"widget": "float", "precision": 2}'/></td>
+                                        </tr>
+                                        <t t-if="line.discount > 0">
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td><span>Precio con descuento</span></td>
+                                                <td><span>$</span><span t-esc="line.price_discount" t-options='{"widget": "float", "precision": 4}'></span></td>
+                                                <td><span>$</span><span t-esc="line.subtotal_line_discount" t-options='{"widget": "float", "precision": 2}'></span></td>
+                                                <td></td>
+                                                <td><span>$</span><span t-esc="line.costo_sugerido_discount" t-options='{"widget": "float", "precision": 2}'></span></td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <div class="footer_mercaderia">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="f_title">
+                                            <h3>Totales</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row footer_info">
+                                    <div class="col-4">
+                                        <div class="f_left">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span>Descuentos %</span></td>
+                                                        <td><span t-esc="o.descuento_global" t-options='{"widget": "float", "precision": 2}'></span> <span>%</span></td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="f_mid">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><span>Suma Exentos</span></td>
+                                                        <td>
+                                                            <span>$</span>
+                                                            <t t-foreach="o.fiscal_position_id" t-as="f">
+                                                                <t t-if="f.name != 'Ventas Exentas' or f.name != 'Ventas No Sujetas' or f.name != 'Internacionales'">
+                                                                    <span>0.0</span>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <p class="sumas" t-esc="o.amount_untaxed" t-options='{"widget": "float", "precision": 2}'></p>
+                                                                </t>
+                                                            </t>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span>Suma Gravado</span></td>
+                                                        <td>
+                                                            <span>$</span>
+                                                            <t t-foreach="o.fiscal_position_id" t-as="f">
+                                                                <t t-if="f.name != 'Ventas Exentas' or f.name != 'Ventas No Sujetas' or f.name != 'Internacionales'">
+                                                                    <span class="sumas" t-esc="float(o.amount_untaxed)" t-options='{"widget": "float", "precision": 2}'/>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <span>0.0</span>
+                                                                </t>
+                                                            </t>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span>Total</span></td>
+                                                        <td><span>$</span><span t-esc="o.amount_untaxed"></span></td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="f_right">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><span>IVA</span></td>
+                                                        <td>
+                                                            <span t-esc="o.iva_calculo"></span>
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span>GranTotal</span></td>
+                                                        <td><span>$</span><span t-esc="o.amount_untaxed + o.iva_calculo" t-options='{"widget": "float", "precision": 2}'></span></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span>Percepción</span></td>
+                                                        <td><span>$</span><span t-esc="o.percepcion_calculo"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span>Total + Percepción</span></td>
+                                                        <td><span>$</span><span t-esc="o.amount_total" t-options='{"widget": "float", "precision": 2}'></span></td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

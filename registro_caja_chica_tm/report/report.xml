@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<report
+            id="report_caja_chica_bds"
+            model="caja.chica"
+            string="Recibo Caja Chica"
+            report_type="qweb-pdf"
+            name="registro_caja_chica_tm.report_caja_chica"
+            file="registro_caja_chica_tm.report_caja_chica"
+			menu = "True"
+        />
+        <record id="paperformat_caja_chica" model="report.paperformat">
+	      <field name="name">Caja chica</field>
+	      <field name="default" eval="True"/>
+	      <field name="format">Letter</field>
+	      <field name="orientation">Portrait</field>
+	      <field name="margin_top">10</field>
+	      <field name="margin_bottom">10</field>
+	      <field name="margin_left">20</field>
+	      <field name="margin_right">20</field>
+	      <field name="header_line" eval="False"/>
+	      <field name="header_spacing">30</field>
+	      <field name="dpi">160</field>
+		</record>
+
+        <record id="report_caja_chica_bds" model="ir.actions.report">
+            <field name="print_report_name">((object.name or '').replace('/','')+'.pdf')
+			</field>
+            <field name="paperformat_id" ref="paperformat_caja_chica"/>
+            <field name="attachment_use" eval="False"/>
+        </record>
+    </data>
+</odoo>

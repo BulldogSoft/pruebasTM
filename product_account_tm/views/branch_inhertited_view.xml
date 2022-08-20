@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="res_branch_product_account_inherited_view" model="ir.ui.view">
+            <field name="name">res.branch.product.inherited.view</field>
+            <field name="model">res.branch</field>
+            <field name="inherit_id" ref="branch.branch_res_branch_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='address']" position="after">
+                    <field name="product_income_account"/>
+                    <field name="product_expense_account"/>
+                    <field name="iva_fcf_account" invisible="1"/>
+                    <field name="iva_ccf_account" invisible="1"/>
+                </xpath>
+                <xpath expr="//form[1]/sheet[1]/group[1]" position="after">
+                    <notebook name="bill_accounts">
+                        <page string="Cuentas Impuestos" name="taxes_custom_accounts">
+                            <group name="left">
+                                <group name="bill_accounts" string="Cuentas de Compras">
+                                    <field name="iva_account_compras"/>
+                                    <field name="fovial_account_compras"/>
+                                    <field name="percepcion_account_compras"/>
+                                    <field name="renta_account_compras"/>
+                                    <field name="cotrans_account_compras"/>
+                                    <field name="importaciones_13_account_compras"/>
+                                </group>
+                                <group>
+
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+                <!-- Inherit Form View to Modify it -->
+        <record id="account_move_branch_account_inherited_view" model="ir.ui.view">
+            <field name="name">res.branch.account.move.inherited.view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//form/header" position="inside">
+                    <button name="bill_account_assignment" type="object" string="Asignar Cuentas" attrs="{'invisible':['|','|',('cuentas_asignadas','=',True), ('state', '!=', 'draft'), ('move_type','in',['out_invoice','out_refund', 'entry'])]}"/>
+                </xpath>
+                <xpath expr="//div[@name='journal_div']" position="after">
+                    <field name="cuentas_asignadas" invisible="1"/>
+                </xpath>
+                <xpath expr="//header/button[2]" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', '|', '|', ('cuentas_asignadas','!=',True), ('state', '!=', 'draft'), ('auto_post', '=', True), ('move_type', '=', 'entry')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

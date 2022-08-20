@@ -1,0 +1,9 @@
+.bet_history tr:last-child td {
+     font-weight: bold;
+}
+
+.popover{
+     height: 400px;
+     overflow: scroll;
+     width: 350px;
+}

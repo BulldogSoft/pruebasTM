@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <template id="bi_pos_multiple_invoice_journal" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/pos_document_type_bds/static/src/js/doctype.js"/>
+                <script type="text/javascript" src="/pos_document_type_bds/static/src/js/doctype_method.js"/>
+                <script type="text/javascript" src="/pos_document_type_bds/static/src/js/model_doctype.js"/>
+                <script type="text/javascript" src="/pos_document_type_bds/static/src/js/popup.js"/>
+                <link rel="stylesheet" href="/pos_document_type_bds/static/src/css/pos_document_type.scss"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="libro_iva_report_ccf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="reporte_impuestos_sv.libro_iva_report_ccf_document"
+                       t-lang="doc.company_id.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+        <template id="libro_iva_report_ccf_document">
+            <t t-set="doc" t-value="doc.with_context({'lang':doc.company_id.partner_id.lang})"/>
+            <t t-call="reporte_impuestos_sv.iva_layout">
+
+                <div class="page article">
+                    <style>
+
+                    </style>
+                    <div>
+                        <br/>
+                        <br/>
+                    <table class="table table-bordered tabla-1">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center" colspan="2">Ventas Internas</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr class="text-center">
+                                <th class="text-center" style="width: 5%;">
+                                    No.
+                                </th>
+                                <th class="text-center" style="width: 5%;">
+                                    Fecha de Emisión
+                                </th>
+                                <th class="text-center" style="width: 10%;">
+                                    No. Documento
+                                </th>
+                                <th class="text-center" style="width: 10%;">
+                                    No. Formulario único
+                                </th>
+
+                                <th class="text-center" style="width: 30%;">
+                                    Nombre Contribuyente
+                                </th>
+                                <th class="text-center" style="width: 10%;">
+                                    N.R.C
+                                </th>
+
+                                <th class="text-center" style="width: 5%;">
+                                    Exentas
+                                </th>
+                                <th class="text-center" style="width: 5%;">
+                                    Gravadas
+                                </th>
+                                <th class="text-center" style="width: 5%;">
+                                    Débito Fiscal
+                                </th>
+                                <th class="text-center" style="width: 5%;">
+                                    IVA Retenido
+                                </th>
+                                <th class="text-center" style="width: 10%;">
+                                    Total Ventas
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Inicializando Variables -->
+                            <t t-set="exentas" t-value="0"/>
+                            <t t-set="gravadas" t-value="0"/>
+                            <t t-set="debito_fiscal" t-value="0"/>
+                            <t t-set="retenciones" t-value="0"/>
+                            <t t-set="totales" t-value="0"/>
+
+                            <tr t-foreach="doc.libro_line_ccf" t-as="l">
+                                <td class="text-center">
+                                    <span t-field="l.correlativo"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.fecha_doc"/>
+                                </td>
+
+                                <td class="text-center">
+                                    <span t-field="l.prefijo"/>
+                                    -
+                                    <span t-field="l.num_doc"/>
+                                </td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">
+                                    <span t-field="l.name"/>
+                                </td>
+                                <td class="text-center">
+                                    <span t-field="l.nrc"/>
+                                </td>
+
+                                <td class="text-right">
+                                    <span t-field="l.exentas_nosujetas"
+                                          t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                    <t t-set="exentas" t-value="l.exentas_nosujetas + exentas"/>
+                                </td>
+
+                                <td class="text-right">
+                                    <span t-field="l.gravadas"
+                                          t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                    <t t-set="gravadas" t-value="l.gravadas + gravadas"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.debito_fiscal"
+                                          t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                    <t t-set="debito_fiscal" t-value="l.debito_fiscal + debito_fiscal"/>
+                                </td>
+
+                                <td class="text-right">
+                                    <span t-field="l.retenciones"
+                                          t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                    <t t-set="retenciones" t-value="l.retenciones + retenciones"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.totales"
+                                          t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                    <t t-set="totales" t-value="l.totales + totales"/>
+                                </td>
+
+                            </tr>
+                            <tr style="font-weight: bold; font-size:20px!important;">
+                                <td colspan="6" class="text-center">
+                                    Total General
+                                </td>
+
+                                <td class="text-right">
+                                    <span t-esc="exentas"
+                                          t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="gravadas"
+                                          t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="debito_fiscal"
+                                          t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                </td>
+
+                                <td class="text-right">
+                                    <span t-esc="retenciones"
+                                          t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="totales"
+                                          t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    </div>
+
+                    <div class="firma" style="text-align: center; padding: 30px 0; margin-top:7%;">
+                        <span style="font-size:25px;">
+                            _________________________________
+                            <br/>
+                            Nombre y firma del contador
+                        </span>
+                    </div>
+
+                    <div style="page-break-after: always;"/>
+
+
+                    <style>
+                        .tabla-1 thead tr th
+                        {
+                        border: 1px solid black !important;
+                        font-size:20px;
+
+                        }
+                        .tabla-1 tbody tr td
+                        {
+                        border: 1px solid black !important;
+
+                        }
+                        .tabla-1 tbody tr td span
+                        {
+                        font-size:22px;
+                        }
+                        .container-tabla-detalles
+                        {
+                        margin-top:5%;
+                        }
+
+
+                        .container-tabla-detalles th
+                        {
+                        padding: 7px 25px;
+                        margin-right: 10px;
+                        border:1px solid #999;
+
+
+                        }
+                        .container-tabla-detalles td {
+                        padding: 7px 25px;
+                        margin-right: 10px;
+                        border:1px solid #999;
+                        }
+                        .container-tabla-detalles td span
+                        {
+                        font-size:20px;
+                        }
+                    </style>
+
+
+                    <div class="container-tabla-detalles d-flex justify-content-center">
+                        <div class="tablita">
+                            <style>
+                                .tablita table th, tr, td
+                                {
+                                border:1px solid black !important;
+                                padding: 10px;
+
+
+                                }
+                                .tablita table
+                                {
+                                width: 100%;
+                                display: block;
+                                border: 1px solid black;
+                                border-collapse: collapse;
+                                text-align: center;
+                                vertical-align: center;
+                                }
+                                .tablita table td{
+                                padding: 10px;
+                                text-align: right; }
+                            </style>
+                            <table>
+                                <thead>
+
+                                    <tr>
+
+                                        <th rowspan="2">RESUMEN DE OPERACIONES</th>
+
+                                        <th colspan="2">Propias</th>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <th>Valor Neto</th>
+
+                                        <th>Debito Fiscal</th>
+
+                                        <th>Iva Retenido</th>
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>VENTAS NETAS INTERNAS GRAVADAS A CONTRIBUYENTES</td>
+                                        <td>
+                                            <span t-foreach="doc.resumen_line_ccf" t-as="r">
+                                                <span t-if="r.detalle == 'Ventas Gravadas'"
+                                                      t-esc="r.total"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-foreach="doc.resumen_line_ccf" t-as="r">
+                                                <span t-if="r.detalle == 'Debito Fiscal'"
+                                                      t-esc="r.total"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-foreach="doc.resumen_line_ccf" t-as="r">
+                                                <span t-if="r.detalle == 'Retenciones'"
+                                                      t-esc="r.total"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                            </span>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>VENTAS NETAS INTERNAS GRAVADAS A CONSUMIDORES</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>TOTAL OPERACIONES INTERNAS GRAVADAS</td>
+                                        <td>
+                                            <span t-foreach="doc.resumen_line_ccf" t-as="r">
+                                                <span t-if="r.detalle == 'Ventas Gravadas'"
+                                                      t-esc="r.total"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-foreach="doc.resumen_line_ccf" t-as="r">
+                                                <span t-if="r.detalle == 'Debito Fiscal'"
+                                                      t-esc="r.total"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-foreach="doc.resumen_line_ccf" t-as="r">
+                                                <span t-if="r.detalle == 'Retenciones'"
+                                                      t-esc="r.total"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>VENTAS NETAS INTERNAS EXENTAS A CONTRIBUYENTES</td>
+                                        <td>
+                                            <span t-foreach="doc.resumen_line_ccf" t-as="r">
+                                                <span t-if="r.detalle == 'Ventas Exentas'"
+                                                      t-esc="r.total"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>VENTAS NETAS INTERNAS EXENTAS A CONSUMIDORES</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>TOTAL OPERACIONES INTERNAS EXENTAS</td>
+                                        <td>
+                                            <span t-foreach="doc.resumen_line_ccf" t-as="r">
+                                                <span t-if="r.detalle == 'Ventas Exentas'"
+                                                      t-esc="r.total"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

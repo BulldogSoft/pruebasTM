@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+reporte_cero_tienda,reporte.cero.tienda,model_reporte_cero_tienda,,1,1,1,1
+reporte_cero_sala,reporte.cero.sala,model_reporte_cero_sala,,1,1,1,1
+
+
+

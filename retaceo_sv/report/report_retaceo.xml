@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_document_retaceo">
+            <t t-call="web.html_container">
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <div class="header">
+
+                </div>
+                <!--############################################################################################################-->
+                <div t-att-data-oe-model="o._name" t-att-data-oe-id="o.id"
+                     t-att-data-oe-lang="o and o.env.context.get('lang')" class="page article">
+
+                    <div>
+                        <div style="width: 20%;float: left;">
+                            <img src="/web/binary/company_logo" style="width:100%"/>
+                        </div>
+
+                        <div style="width:100%; text-align: center; font-size: 40px; padding-top: 25px">
+                            <strong>
+                                <span t-field="o.company_id.name"></span>
+                            </strong>
+                        </div>
+                    </div>
+
+                    <div style="width:100%; text-align: right; font-size: 20px; padding-top: 35px">
+                        <span t-field="o.company_id.street"></span>
+                        <br/>
+                        <span t-field="o.company_id.phone"></span>
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <style>
+                        .tabla
+                        {
+                        width: 100%;
+                        border-collapse: collapse;
+                        }
+
+                        .tablat td, th
+                        {
+                        font-size: 24px;
+                        padding: 4px 4px;
+                        }
+                    </style>
+
+                    <div>
+                        <div class="row">
+                            <table class="tabla tablat">
+                                <tr>
+                                    <td style="width:15%" class="text-left">Documento:</td>
+                                    <td style="width:35%"><span t-field="o.name"/></td>
+                                    <td style="width:15%" class="text-left">PO:</td>
+                                    <td style="width:35%"><span t-field="o.order_id.name"/></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="row">
+                            <table class="tabla tablat">
+                                <tr>
+                                    <td style="width:15%" class="text-left">Descripción</td>
+                                    <td style="width:35%"><span t-field="o.descripcion"/></td>
+                                    <td style="width:15%" class="text-left">Guia/BL:</td>
+                                    <td style="width:35%"><span t-field="o.guia_bl"/></td>
+
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <table class="tabla tablat">
+                                <tr>
+                                    <td style="width:15%" class="text-left">Fecha:</td>
+                                    <td style="width:35%"><span t-field="o.fecha"/></td>
+                                    <td style="width:15%" class="text-left">Incoterm:</td>
+                                    <td style="width:35%"><span t-field="o.incoterm_id.name"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br/>
+                        <br/>
+                        <h3 class="text-center">
+                            Gastos de Internación
+                        </h3>
+                        <div class="row">
+                            <table class="tabla tablat">
+                                <tr class="text-left" style="border-bottom: 1px solid black; border-top: 1px solid black">
+                                    <th style="width:40%">Factura</th>
+                                    <th style="width:40%">Referencia</th>
+                                    <th style="width:20%">Total</th>
+                                </tr>
+                                <tr t-foreach="o.cost_lines" t-as="l">
+                                    <td class="text-left">
+                                        <span t-field="l.invoice_id.number"/>
+                                    </td>
+                                    <td class="text-lef">
+                                        <span t-field="l.reference"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="l.total"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <br/>
+                        <br/>
+                        <h3 class="text-center">
+                            Gastos de Nacionales
+                        </h3>
+                        <div class="row">
+                            <table class="tabla tablat">
+                                <tr class="text-left"
+                                    style="border-bottom: 1px solid black; border-top: 1px solid black">
+                                    <th style="width:40%">Factura</th>
+                                    <th style="width:40%">Referencia</th>
+                                    <th style="width:20%">Total</th>
+                                </tr>
+                                <tr t-foreach="o.gastos_nacionales" t-as="l">
+                                    <td class="text-left">
+                                        <span t-field="l.invoice_id.number"/>
+                                    </td>
+                                    <td class="text-lef">
+                                        <span t-field="l.reference"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="l.total"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <br/>
+                        <br/>
+                        <h3 class="text-center">
+                            Ajustes de Valorización
+                        </h3>
+                        <div class="row">
+                            <table class="tabla tablat">
+                                <tr class="text-left"
+                                    style="border-bottom: 1px solid black; border-top: 1px solid black">
+                                    <th style="width:30%">Producto</th>
+                                    <th style="width:8%">Precio</th>
+                                    <th style="width:8%">Cantidad</th>
+                                    <th style="width:8%">Costo</th>
+                                    <th style="width:10%">GI</th>
+                                    <th style="width:10%">V.CIF</th>
+                                    <th style="width:10%">GN</th>
+                                    <th style="width:8%">C.Total</th>
+                                    <th style="width:8%">C.Unitario</th>
+                                </tr>
+                                <tr t-foreach="o.valuation_adjustment_lines" t-as="l">
+                                    <td class="text-left">
+                                        [<span t-field="l.product_id.default_code"/>]<span t-field="l.product_id.name"/>
+                                    </td>
+                                    <td class="text-lef">
+                                        <span t-field="l.unit_price"/>
+                                    </td>
+                                    <td class="text-lef">
+                                        <span t-field="l.quantity"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="l.former_cost" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="l.porrateo_int" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="text-lef">
+                                        <span t-field="l.vcif" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="l.porrateo_nac" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="text-lef">
+                                        <span t-field="l.costo_total" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-field="l.costo_unitario"
+                                              t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                </tr>
+                                <div class="firmas last-page row footer" style="margin-top:100px;">
+                                    <div class="col-4 text-center">
+                                        <div class="linea"
+                                             style="width:80%; height:2px; border-bottom:2px solid #333; margin:auto;"></div>
+                                        <div class="texto"><span style="font-size: 24px;">Solicitado por:</span></div>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <div class="linea"
+                                             style="width:80%; height:2px; border-bottom:2px solid #333; margin:auto;"></div>
+                                        <div class="texto"><span style="font-size: 24px;">Recibido por:</span></div>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <div class="linea"
+                                             style="width:80%; height:2px; border-bottom:2px solid #333; margin:auto;"></div>
+                                        <div class="texto"><span style="font-size: 24px;">Autorizado por:</span></div>
+                                    </div>
+                                </div>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

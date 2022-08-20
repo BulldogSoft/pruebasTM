@@ -1,0 +1,167 @@
+.pre_header_tm_ccf{
+    width:100%;
+    height: 160px;
+    padding:0;
+    margin:0;
+}
+.header_info_tm_ccf{
+    width:100%;
+    height: 100px;
+    padding:0;
+    margin:0;
+    padding-top:12px;
+    table{
+        width:100%;
+        tbody{
+            tr{
+                td{
+                padding: 3px;
+                }
+                &:nth-child(1){
+                    td{
+                        padding-bottom:7contpx;
+                        &:nth-child(1){
+                            width:70%;
+                        }
+                        &:nth-child(2){
+                            width:30%;
+                            text-align:center;
+                        }
+                    }
+                }
+                &:nth-child(2),&:nth-child(3){
+                    td{
+                        &:nth-child(1){
+                            padding-left:90px;
+                        }
+                    }
+                }
+                &:nth-child(4),&:nth-child(5){
+                    td{
+                        &:nth-child(1){
+                            width:40%!important;
+                            padding-left:90px;
+                        }
+                        &:nth-child(2){
+                            width:60%!important;
+                            text-align:left;
+                        }
+                    }
+                }
+            &:nth-child(6){
+                td{
+                    &:nth-child(1){
+                        width:70%!important;
+                        padding-left:90px;
+                    }
+                    &:nth-child(2){
+                        width:30%!important;
+                        text-align:left;
+                    }
+                }
+             }
+            &:nth-child(7){
+                td{
+                    &:nth-child(1){
+                        width:40%!important;
+                        padding-left:90px;
+                    }
+                    &:nth-child(2){
+                        width:60%!important;
+                        text-align:left;
+                    }
+                }
+              }
+            }
+        }
+    }
+}
+.productos_ccf{
+    padding-top:150px;
+    table{
+        width:98%;
+        margin-left:2%;
+        tbody{
+            tr{
+                td{
+                    &:nth-child(1){
+                        width:50%;
+                    }
+                    &:nth-child(2){
+                        width:9%;
+                        text-align:center!important;
+
+                    }
+                    &:nth-child(3){
+                        width:9%;
+                        text-align:right;
+
+                    }
+                    &:nth-child(4){
+                        width:9%;
+                        text-align:right;
+
+                    }
+                    &:nth-child(5){
+                        width:9%;
+                        text-align:right;
+
+                    }
+                    &:nth-child(6){
+                        width:14%;
+                        text-align:right;
+                    }
+                }
+            }
+        }
+    }
+}
+.footer_tm_ccf{
+    .footer_container{
+        width: 97%;
+        margin-left: 3%;
+        display:flex;
+        .footer_left{
+            width:50%;
+            span{
+                text-transform:uppercase;
+                padding-left: 30px;
+            }
+        }
+        .footer_right{
+            width:50%;
+            table{
+                width:100%;
+                .punto{
+                    color:white;
+                }
+                tr{
+                    td{
+
+                        &:nth-child(1){
+                            width:20%;
+                        }
+                          &:nth-child(2){
+                            width:18%;
+                        }
+                          &:nth-child(3){
+                            width:18%;
+
+                        }
+                          &:nth-child(4){
+                            width:18%;
+                        }
+                          &:nth-child(5){
+                            width:26%;
+                            text-align: right;
+                        }
+
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+

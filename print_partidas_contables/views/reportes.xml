@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_partidas"
+            string="Partidas de Costo"
+            model="account.move"
+            report_type="qweb-pdf"
+            name="print_partidas_contables.report_partidas_contables"
+            file="print_partidas_contables.report_partidas_contables"
+        />
+    </data>
+</odoo>

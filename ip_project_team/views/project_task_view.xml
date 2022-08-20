@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="project_task_form_view_inherit_ip" model="ir.ui.view">
+            <field name="name">project.task.form.view.inherit.ip</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="team_members" invisible="1"/>
+                    <field name="manager" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="reporte_top_css_xd" inherit_id="web.report_assets_pdf">
+            <xpath expr="."  position="inside">
+                <link  rel="stylesheet" type="text/css" href="/cheques_bds_tm/static/src/css/cheque.scss"/>
+                <link  rel="stylesheet" type="text/css" href="/cheques_bds_tm/static/src/css/cheque_multi_formato.scss"/>
+                <link  rel="stylesheet" type="text/css" href="/cheques_bds_tm/static/src/css/cheque_multi_footer.scss"/>
+            </xpath>
+        </template>
+        <report
+                id="cheque_tm_report"
+                string="Cheque interno TM"
+                model="account.payment"
+                report_type="qweb-pdf"
+                name="cheques_bds_tm.cheque_tm"
+                file="cheques_bds_tm.cheque_tm"
+        />
+        <record id="paperformat_cheque_tm" model="report.paperformat">
+            <field name="name">Cheque TM</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <!-- margin_top empuja hacia abajo documento incluyendo solo al  header y body-->
+            <field name="margin_top">85.50</field>
+            <field name="margin_bottom">80</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False"/>
+            <!--Header_spacing empuja el header hacia arriba-->
+            <field name="header_spacing">65</field>
+            <!--Dpi funciona como un zoom, el valor por defecto es 90-->
+            <field name="dpi">110</field>
+        </record>
+
+        <record id="cheques_bds_tm.cheque_tm_report" model="ir.actions.report">
+            <field name="paperformat_id" ref="cheques_bds_tm.paperformat_cheque_tm" />
+        </record>
+
+        <report
+                id="cheque_multi_formato_report"
+                string="Cheque Multiformato"
+                model="account.payment"
+                report_type="qweb-pdf"
+                name="cheques_bds_tm.cheque_multi_formato"
+                file="cheques_bds_tm.cheque_multi_formato"
+        />
+        <record id="paperformat_cheque_multi_formato" model="report.paperformat">
+            <field name="name">Cheque Multiformato TM</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <!-- margin_top empuja hacia abajo documento incluyendo solo al  header y body-->
+            <field name="margin_top">20.50</field>
+            <field name="margin_bottom">80</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">18</field>
+            <field name="header_line" eval="False"/>
+            <!--Header_spacing empuja el header hacia arriba-->
+            <field name="header_spacing">19</field>
+            <!--Dpi funciona como un zoom, el valor por defecto es 90-->
+            <field name="dpi">110</field>
+        </record>
+
+        <record id="cheques_bds_tm.cheque_multi_formato_report" model="ir.actions.report">
+            <field name="paperformat_id" ref="cheques_bds_tm.paperformat_cheque_multi_formato" />
+        </record>
+
+
+        <report
+                id="cheque_multi_formato_partidas_report"
+                string="Cheque Multiformato"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="cheques_bds_tm.cheque_multi_formato_partidas"
+                file="cheques_bds_tm.cheque_multi_formato_partidas"
+        />
+        <record id="paperformat_cheque_multi_formato_partidas" model="report.paperformat">
+            <field name="name">Cheque Multiformato TM</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <!-- margin_top empuja hacia abajo documento incluyendo solo al  header y body-->
+            <field name="margin_top">20.50</field>
+            <field name="margin_bottom">80</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">18</field>
+            <field name="header_line" eval="False"/>
+            <!--Header_spacing empuja el header hacia arriba-->
+            <field name="header_spacing">19</field>
+            <!--Dpi funciona como un zoom, el valor por defecto es 90-->
+            <field name="dpi">110</field>
+        </record>
+
+        <record id="cheques_bds_tm.cheque_multi_formato_partidas_report" model="ir.actions.report">
+            <field name="paperformat_id" ref="cheques_bds_tm.paperformat_cheque_multi_formato_partidas" />
+        </record>
+
+
+    </data>
+</odoo>

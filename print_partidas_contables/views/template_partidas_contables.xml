@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_partidas_contables">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="info_xd">
+                        <t t-foreach="docs" t-as="l">
+                            <div class="info-contenedor">
+                                <div class="el-td">
+                                    <span t-esc="l.journal_id.name"/>
+                                </div>
+
+                                <div class="el-td-2">
+                                    <strong>Fecha: </strong>
+                                    <span t-esc="l.date"/>
+                                </div>
+                                <div class="el-td-2">
+                                    <strong>Referencia: </strong>
+                                    <span t-esc="l.ref"/>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+                    <!-- Declarando Variables-->
+                    <t t-set="total_debito" t-value="0"/>
+                    <t t-set="total_credito" t-value="0"/>
+                    <t t-set="total_total_d" t-value="0"/>
+                    <t t-set="total_total_c" t-value="0"/>
+
+
+                    <table class="table tabla-partidas" border="3" style="font-size:12px;">
+                        <thead>
+                            <tr>
+                                <th width="30%">Cuenta</th>
+                                <!--  <th width="100px">Fecha</th>-->
+                                <th width="30%">Cliente</th>
+                                <th width="30%">Concepto</th>
+                                <!--<th>Cuenta Análitica</th>-->
+                                <th width="5%">Débito</th>
+                                <th width="5%">Crédito</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="o">
+                                <t t-call="print_partidas_contables.report_partidas_lineas">
+                                </t>
+
+                                <tr id="totales_1">
+                                    <td colspan="3" style="text-align:center;">Total</td>
+                                    <td>
+                                        <span t-esc="o.amount_total_signed" style="display:none;"/>
+                                        <t t-set="total_total_d" t-value="total_total_d + o.amount_total_signed"/>
+                                        <strong><span t-esc="'{0:,.2f}'.format(float(total_total_d))"/></strong>
+                                    </td>
+                                    <td>
+                                        <span t-esc="o.amount_total_signed" style="display:none;"/>
+                                        <t t-set="total_total_c" t-value="total_total_c + o.amount_total_signed"/>
+                                        <strong><span t-esc="'{0:,.2f}'.format(float(total_total_c))"/></strong>
+                                    </td>
+                                </tr>
+
+                            </t>
+
+                        </tbody>
+                    </table>
+                    <div class="firmas last-page row footer" style="margin-top:100px;">
+                        <div class="col-4 text-center">
+                            <div class="linea"
+                                 style="width:80%; height:2px; border-bottom:2px solid #333; margin:auto;"></div>
+                            <div class="texto"><span>Solicitado por:</span></div>
+                        </div>
+                        <div class="col-4 text-center">
+                            <div class="linea"
+                                 style="width:80%; height:2px; border-bottom:2px solid #333; margin:auto;"></div>
+                            <div class="texto"><span>Recibido por:</span></div>
+                        </div>
+                        <div class="col-4 text-center">
+                            <div class="linea"
+                                 style="width:80%; height:2px; border-bottom:2px solid #333; margin:auto;"></div>
+                            <div class="texto"><span>Autorizado por:</span></div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_partidas_lineas">
+        <tr t-foreach="o.line_ids" t-as="l">
+            <td>
+                <span t-esc="l.account_id.code"/>
+                <span t-esc="l.account_id.name"/>
+            </td>
+            <!--<td width="8%">
+                <span t-field="l.date_maturity"
+                      t-field-options="{&quot;format&quot;: &quot;dd MMMM, YYYY&quot;}"/>
+            </td>-->
+            <td>
+                <span t-esc="l.partner_id.name"/>
+            </td>
+            <td>
+                <span t-esc="l.name"/>
+            </td>
+            <!--        <td width="5%">
+                        <span t-esc="l.analytic_account_id.name"/>
+                    </td>-->
+            <td>
+                <span t-esc="'{0:,.2f}'.format(float(l.debit))"/>
+                <t t-set="total_debito" t-value="total_debito + l.debit"/>
+            </td>
+            <td class="text-right">
+                <span t-esc="'{0:,.2f}'.format(float(l.credit))"/>
+                <t t-set="total_credito" t-value="total_credito + l.credit"/>
+            </td>
+        </tr>
+    </template>
+
+    <template id="css_report_partidas" inherit_id="web.report_assets_common">
+        <xpath expr="."  position="inside">
+            <link href="/print_partidas_contables/static/css/estilos_report_partidas.css" rel="stylesheet"/>
+        </xpath>
+    </template>
+</odoo>

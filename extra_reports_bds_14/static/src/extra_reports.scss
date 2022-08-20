@@ -1,0 +1,242 @@
+
+//reporte picking list
+.pre_header_po{
+     margin:0;
+     padding:0;
+    p{
+        font-size: 10px;
+        margin:0;
+        padding:1px;
+        margin: 1px 5px;
+        padding: 1px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #888;
+    }
+    .preheader_uno{
+        margin:0;
+        padding:0;
+        display:flex;
+        margin-top:10px;
+        .preheader_po_info{
+            width:42%;
+            flex-direction:row;
+            .po_field{
+                width:50%;
+                display:flex;
+                p{
+                    &:first-child{
+                        font-weight:700;
+                    }
+                }
+            }
+        }
+        .preheader_po_email{
+            width:40%;
+            display:flex;
+            padding:0;
+            p{
+                padding:0;
+            }
+            .col-2{
+            }
+            .col-10{
+                p{
+                    text-transform: lowercase;
+                    font-size: 13px;
+                }
+            }
+
+        }
+        .preheader_po_number{
+               width:20%;
+               position:relative;
+               p{
+                    position:absolute;
+                    top:40%;
+                    left:7%;
+                    width:100%;
+                    margin-top:8px;
+               }
+               h2{
+                    position:absolute;
+                    bottom:-10%;
+                    left:7%;
+               }
+        }
+    }
+      .proheader_dos{
+        margin:0;
+        padding:0;
+        display:flex;
+        margin-top:10px;
+        padding-top:5px;
+        border-top:1px solid #777;
+        .preheader_po_info_2{
+            width:100%;
+            flex-direction:row;
+            .po_field{
+                width:50%;
+                display:flex;
+                   p{
+                       width:100% ;
+                       font-weight:700;
+                       letter-spacing: 1.4px;
+                       span{
+                         margin-left: 10px;
+                         font-weight:400;
+                         letter-spacing: 1.4px;
+
+                       }
+
+                }
+            }
+        }
+    }
+    .logo_gg{
+        position:absolute;
+        text-align: center;
+        img{
+            width:88%;
+            margin-top: -7%;
+        }
+   }
+  .logo_gg_alfaro{
+        position:absolute;
+        text-align: center;
+        img{
+            width:50%;
+            margin-top: -28%;
+            margin-left: 7%;
+        }
+   }
+   .h_title{
+        h3{
+            text-align: center;
+
+        }
+
+   }
+   .categoria_contri{
+        margin-top:15px;
+       .po_field_e{
+        width:100%;
+           p{
+                width:100%;
+                font-weight:700;
+                span{
+                    font-weight:400;
+                    margin-left:8px;
+                }
+        }
+    }
+   }
+}
+.report_tabla_po{
+    width:100%;
+    thead{
+
+        span{
+            font-weight: 500;
+            font-size: 12px;
+            padding: 7px 5px;
+            text-align: center;
+        }
+        tr{
+             border-bottom: 1px solid #767676;
+             margin-bottom: 5px;
+            th{
+                text-align: center;
+                padding: 3px 0;
+                &:nth-child(1){
+                    width: 10%;
+                }
+                &:nth-child(2){
+                    width: 32%;
+                }
+                &:nth-child(3){
+                    width: 7.5%;
+                }
+                &:nth-child(4){
+                    width: 10%;
+                }
+
+                &:nth-child(5){
+                    width: 8%;
+                }
+                &:nth-child(6){
+                    width: 12.5%;
+                }
+                &:nth-child(7){
+                    width: 10%;
+                }
+                &:nth-child(8){
+                    width: 10%;
+                }
+            }
+        }
+    }
+     tbody{
+        tr{
+            td{
+                text-align:center;
+                span{
+                    font-weight: 500;
+                    font-size: 12px;
+                    padding: 7px 5px;
+                    text-align: center;
+                }
+            }
+        }
+
+     }
+}
+.footer_po{
+    width:100%;
+    margin-top: 30px;
+    td{
+    padding:3px;
+    font-size:14px;
+    text-align:center;
+     &:nth-child(1){
+        width: 70%;
+        text-transform:uppercase;
+        text-align: justify;
+     }
+    &:nth-child(2){
+        width: 15%;
+    }
+    &:nth-child(3){
+        width: 15%;
+
+    }
+   }
+  .total_po{
+    td{
+        border-top: 1px solid black;
+        &:nth-child(1){
+        font-weight:700;
+        border:none;
+        }
+        &:nth-child(2){
+           font-weight:700;
+        }
+    }
+    }
+}
+.condiciones{
+    p{
+        font-size:11px;
+        padding: 1px;
+        margin:0;
+    }
+}
+.firmas_po{
+    margin-top:80px;
+    .linea{
+        border-bottom:1px solid black;
+        .punto{
+            color:white;
+        }
+    }
+}

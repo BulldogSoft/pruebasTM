@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="reporte_top_css" inherit_id="web.report_assets_common">
+            <xpath expr="."  position="inside">
+                <link  rel="stylesheet" type="text/css" href="/l10n_invoice_reports_sv/static/src/css/fcf.scss"/>
+                <link  rel="stylesheet" type="text/css" href="/l10n_invoice_reports_sv/static/src/css/ccf.scss"/>
+                <link  rel="stylesheet" type="text/css" href="/l10n_invoice_reports_sv/static/src/css/se.scss"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

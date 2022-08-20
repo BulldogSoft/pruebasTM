@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_concepto_pago" model="ir.ui.view">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_reference']" position="after">
+                    <field name="concepto_factura"></field>
+                </xpath>
+                <xpath expr="//header/button[@name='button_cancel']" position="after">
+                    <button type="object" name="print_mercaderia" string="Imprimir recepción de mercaderia" class="btn btn-primary" invisible="context.get('default_move_type') != ('in_invoice')"></button>
+                </xpath>
+                <xpath expr="//group[@id='other_tab_group']" position="inside">
+                    <group string="Recepción de Mercaderia" invisible="context.get('default_move_type') != ('in_invoice')">
+                        <field name="form_aduanero"></field>
+                        <field name="fecha_ingreso"></field>
+                        <field name="fecha_edicion"></field>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='price_unit']" position="after">
+                    <field name="price_discount"></field>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_purchase_config_costo_sugerido" model="ir.ui.view">
+            <field name="name">Costo Sugerido settings</field>
+            <field name="model">res.config.settings</field> <!-- odoo11 -->
+            <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/> <!-- odoo11 -->
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='matrix_setting_container']" position="inside">
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="costo_sugerido_panel">
+                        <div class="o_setting_left_pane">
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="costo_sugerido" string="Costo Sugerido %"/>
+                            <div class="text-muted">
+                                Agrega el porcentaje a aplicar para el cálculo del costo sugerido
+                            </div>
+                            <field name="costo_sugerido"/>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <template id="report_invoice_ndc">
+      <t t-call="web.html_container">
+        <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+        <div class="header">
+          
+        </div>
+        <div t-att-data-oe-model="o._name" t-att-data-oe-id="o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" class="page article">
+
+            <style type="text/css">
+            .mytable {
+              border-collapse: collapse;
+              width: 100%;
+              background-color: white;
+              }
+              .tabla-trh td {
+              font-size: 24px;
+              padding: 8px 3px;
+              }
+            </style>
+
+          <div class="row">
+          <table class="mytable tabla-trh" >
+            <tr>
+              <td width="55.62%" style="padding:4px 3px" colspan="2"> </td>   <!--fecha-->
+              <td width="9.93%"> </td>
+              <td width="34.43%">
+                <span t-field="o.date_invoice"/>
+              </td>
+            </tr>
+          </table>
+          </div>
+
+          <div class="row">
+          <table class="mytable tabla-trh">       <!--cliente-->
+            <tr>
+              <td width="9.93%"> </td>
+              <td width="90.06%" colspan="2">
+                <span t-field="o.partner_id"/>
+              </td>
+            </tr>
+          </table>
+          </div>
+
+           <div class="row">
+          <table class="mytable tabla-trh">       <!--direccion-->
+            <tr>
+              <td width="9.93%"> </td>
+              <td width="90.06%" colspan="2">
+                <span t-if="o.partner_id.street">
+                        <span t-field="o.partner_id.street"/>
+                      </span>
+                      <span t-if="o.partner_id.street2">
+                        , <span t-field="o.partner_id.street2"/>
+                      </span>
+                      <span t-if="o.partner_id.city">
+                        , <span t-field="o.partner_id.city"/>
+                      </span>
+              </td>
+            </tr>
+          </table>
+           </div>
+
+          <div class="row">
+          <table class="mytable tabla-trh">          <!--departamento y nrc-->
+            <tr>
+              <td width="13.24%"> </td>
+              <td width="49.66%">
+                <span t-field="o.partner_id.state_id"/>
+              </td>
+              <td width="9.93%"> </td>
+              <td width="27.15%">
+                <span t-field="o.partner_id.nrc"/>
+              </td>
+            </tr>
+          </table>
+          </div>
+
+           <div class="row">
+          <table class="mytable tabla-trh">           <!--nit y giro-->
+            <tr>
+              <td width="4.63%"> </td>
+              <td width="25.16%">
+                <span t-field="o.partner_id.nit"/>
+              </td>
+              <td width="6.62%"> </td>
+              <td width="63.57%">
+                <span t-field="o.partner_id.giro"/>
+              </td>
+            </tr>
+          </table>
+           </div>
+
+           <div class="row">
+          <table class="mytable tabla-trh">
+            <tr>
+              <td width="23.17%" style="color: white;">.</td>
+              <td width="26.49%"> </td>
+              <td width="15.23%"> </td>
+              <td width="35.09%"> </td>
+            </tr>
+          </table>
+          </div>
+
+          <div class="row">
+          <table class="mytable tabla-trh">
+            <tr>
+              <td width="36.42%" style="color: white;">.</td>
+              <td width="63.57%"> </td>
+            </tr>
+          </table>
+          </div>
+          <!--Fin Tabla 1-->
+          <div id="salto">
+          </div>
+
+          <style>
+            #tabla-3
+            {
+            width: 100%;
+            }
+            #salto
+            {
+            height:8px;
+            width:100%;
+            }
+            #tabla-3 td
+            {
+            font-size: 23px;
+            }
+            #tabla-3 th{
+            padding: 18px 3px;
+            }
+
+          </style>
+
+          <div class="row">
+            <table id="tabla-3" class="text-center">
+              <thead>
+                <tr>
+                  <th style="width:6.62%; height: 30.4px;"> </th>
+                  <th style="width:57.61"> </th>
+                  <th style="width:9.27%"> </th>
+                  <th style="width:6.62%"> </th>
+                  <th style="width:6.62%"> </th>
+                  <th style="width:12.58%"> </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr t-foreach="o.invoice_line_ids" t-as="l">
+                  <td>
+                      <span t-field="l.quantity"/>
+                      <span t-field="l.uom_id"  groups="product.group_uom"/>
+                  </td>
+                  <td class="text-justify">
+                    <span style="padding-left 5px" t-field="l.name"/>
+                  </td>
+                  <td>
+                    <span t-esc="l.price_unit"
+                           t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                  </td>
+                  <td> </td>
+                  <td> </td>
+                  <td>
+                      <span t-esc="l.price_subtotal"
+                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                  </td>
+                  </tr>
+              </tbody>
+              </table>
+          </div>
+          <!--Fin Tabla 1-->
+
+          <div class="footer">
+          <style>
+            #tabla-t
+            {
+            width: 100%;
+            }
+            #tabla-t td
+            {
+            font-size: 23px;
+            }
+          </style>
+
+          <div class="row">
+            <table id="tabla-t" class="text-center">
+                <tr>
+                  <td style="width:6.62%"> </td>
+                  <td style="width:57.61">
+                    <span t-field="o.amount_text"/>
+                  </td>
+                  <td style="width:9.27%"> </td>
+                  <td style="width:6.62%"> </td>
+                  <td style="width:6.62%"> </td>
+                  <td style="width:12.58%">
+                    <span t-field="o.amount_untaxed"/>
+                  </td>
+                </tr>
+
+              <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="3"> </td>
+                <td style="height: 30.4px;">
+                  <span t-field="o.amount_tax"/>
+                </td>
+              </tr>
+
+              <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="3"> </td>
+                <td style="color: white;">. </td>
+              </tr>
+
+              <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="3"> </td>
+                <td>
+                  <span t-field="o.amount_total"/>
+                </td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="3"> </td>
+                <td style="color: white;">. </td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="3"> </td>
+                <td style="color: white;">. </td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="3"> </td>
+                <td style="color: white;">. </td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="3"> </td>
+                <td style="color: white;">. </td>
+              </tr>
+
+              <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="3"> </td>
+                <td style="color: white;">. </td>
+              </tr>
+
+              <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="3"> </td>
+                <td style="color: white;">. </td>
+              </tr>
+
+              <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="3"> </td>
+                <td>
+                  <span t-field="o.amount_total"/>
+                </td>
+              </tr>
+            </table>
+            </div>
+          </div>
+        </div>
+      </t>
+    </template>
+  </data>
+</odoo>

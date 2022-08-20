@@ -1,0 +1,133 @@
+.recibi{
+    width:100%;
+    text-align:center;
+    margin-top: 15px;
+    table{
+        width:98%;
+        margin:auto;
+        text-align:center;
+        margin-bottom: 20px;
+        th{
+            border:1px solid black;
+            padding:7px 10px;
+            span{
+                font-weight:400;
+            }
+            .punto{
+                color:white;
+            }
+        }
+    }
+    .conforme{
+        margin-top: 10px;
+        margin-bottom:0;
+    }
+    span{
+        font-size:15px;
+    }
+
+}
+.footer{
+    span{
+        font-size:15px;
+    }
+    .firmas_po{
+        .linea{
+            text-align:left!important;
+            border-bottom:1px solid black;
+        }
+        .texto{
+            font-weight:300!important;
+        }
+    }
+    .logos{
+        .company{
+            position: relative;
+            h4{
+                text-align:center;
+                vertical-align: center;
+                position:absolute;
+                bottom:0;
+                left: 40px;
+            }
+        }
+    }
+}
+.cheque_info{
+    span{
+        font-size:15px;
+    }
+    .cheque_cuadro{
+        table{
+            width:98%;
+            margin:auto;
+            text-transform:uppercase;
+            tbody{
+                border-top: 1px solid black;
+                border-bottom: 1px solid black;
+                tr{
+                    td{
+                        padding:10px 15px;
+                        border-left:1px solid black;
+                        border-right:1px solid black;
+                    }
+                }
+            }
+        }
+    }
+    .cheque_lines{
+        margin-top: 10px;
+        table{
+            width:98%;
+            margin: auto;
+            thead{
+               border-bottom:1px solid black;
+            }
+        }
+    }
+}
+
+.cheque {
+    span{
+        font-size:15px;
+    }
+    margin: auto;
+    width:90%;
+    table{
+        width:80%;
+
+        tbody{
+            tr{
+                td{
+                    color: black;
+                    padding: 3px;
+                }
+            }
+        }
+    }
+    .text_up{
+        text-transform: uppercase;
+    }
+    .chq_nomb{
+        padding-left: 40px;
+    }
+}
+.cheque_gg{
+
+    .chq_year{
+        padding-left:110px;
+    }
+    .cheq_fecha{
+        padding-left:40px;
+    }
+    .cheq_amount{
+        width:35%;
+
+    }
+    .chq_am_tx{
+        padding-left:15px;
+        padding-right: 110px;
+    }
+}
+
+

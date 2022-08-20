@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="libro_iva_report_compras_renta">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="reporte_impuestos_sv.libro_iva_report_compras_renta_document"
+                       t-lang="doc.company_id.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+        <template id="libro_iva_report_compras_renta_document">
+
+            <t t-set="doc" t-value="doc.with_context({'lang':doc.company_id.partner_id.lang})"/>
+            <t t-call="reporte_impuestos_sv.renta_layout">
+                <div class="page article">
+                    <style>
+                        span{font-size: 23px !important;}
+                        table {border-collapse: collapse !important; width: 100%;}
+                        table th, table td {padding: 1px;}
+                        table th {vertical-align: middle !important;}
+                        th {
+                        font-size: 23px !important;
+                        border: 1px solid black !important;
+                        }
+                        td {
+                        border-left: 1px solid gray !important;
+                        border-bottom: 1px solid black !important;
+                        border-bottom-style: dashed;
+                        border-right: 1px solid black !important;
+                        }
+                        .t-compras
+                        {
+                        font-size: 23px!important!
+                        }
+                    </style>
+                    <div class="container">
+                        <br/>
+                        <br/>
+                        <table class="t-compras">
+                            <thead>
+                                <tr >
+                                    <th rowspan="2" class="text-center" style="width: 5%;"> Num </th>
+                                    <th rowspan="2" class="text-center" style="width: 10%;"> Fecha </th>
+                                    <th rowspan="2" class="text-center" style="width: 10%;"> Doc # </th>
+                                    <th rowspan="2" class="text-center" style="width: 15%;"> N.I.T </th>
+                                    <th rowspan="2" class="text-center" style="width: 40%;"> Nombre del Proveedor </th>
+                                    <th rowspan="2" class="text-center" style="width: 10%;"> Monto </th>
+                                    <th rowspan="2" class="text-center" style="width: 10%;"> Retención </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Inicializando Variables -->
+
+                                <t t-set="excluidas" t-value="0"/>
+                                <t t-set="totales" t-value="0"/>
+
+                                <tr t-foreach="doc.libro_line_renta" t-as="l"
+                                    t-if="l.excluidas != 0">
+                                    <td class="text-center">
+                                        <span t-field="l.correlativo"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="l.fecha_doc"/>
+                                    </td>
+                                    <td class="text-left " style="padding-left:12px;">
+                                        <span t-field="l.num_doc"/>
+                                    </td>
+                                    <td class="text-center pl-12" style="padding-left:12px;">
+                                        <span t-field="l.nit"/>
+                                    </td>
+                                    <td class="text-left" style="padding-left:12px;">
+                                        <span t-field="l.name"/>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <span t-if="l.excluidas != 0"
+                                              t-esc="l.totales"
+                                              t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'>
+                                        </span>
+                                         <t t-set="totales" t-value="l.totales + totales"/>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <span t-if="l.excluidas != 0"
+                                              t-esc="l.excluidas * -1"
+                                              t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'>
+                                        </span>
+                                        <t t-set="excluidas" t-value="l.excluidas + excluidas"/>
+                                    </td>
+
+                                </tr>
+                                <tr style="font-weight: bold;">
+                                    <td colspan="5" class="text-center"><span>Total General</span></td>
+
+                                    <td class="text-center">
+                                        <span t-esc="totales"
+                                              t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-esc="excluidas * -1"
+                                              t-options='{"widget": "monetary", "display_currency": doc.company_currency_id}'/>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="firma" style="text-align: center; padding: 30px 0; margin-top:7%;">
+                            <span style="font-size:25px!important;">
+                                _________________________________
+                            <br/>
+                                Nombre y firma del contador
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

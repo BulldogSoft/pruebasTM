@@ -1,0 +1,1071 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="cheque_multi_formato">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.html_container">
+                    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                    <div t-if="o.cheque_formato == 'agricola'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="agricola">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> <span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb"><span t-esc="o.partner_id.name" ></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <t t-if="o.reconciled_invoice_ids">
+                                                            <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                <span t-esc="fac.name"></span>/
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.ref"></span>
+                                                        </t>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table>
+                                            <body>
+                                                <t t-foreach="o.move_id.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </body>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_agricola">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                    </td>
+                                                    <td> <span t-esc="o.user_id.name"></span></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                    <div t-if="o.cheque_formato == 'bac'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="bac">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="chq_fecha"><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/><span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb"><span t-esc="o.partner_id.name" ></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <t t-if="o.reconciled_invoice_ids">
+                                                            <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                <span t-esc="fac.name"></span>/
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.ref"></span>
+                                                        </t>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td><span>Cuenta</span></td>
+                                                    <td><span>Descripción</span></td>
+                                                    <td><span>Debe</span></td>
+                                                    <td><span>Haber</span></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.move_id.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_bac">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="o.user_id.name"></span>
+                                                        <p class="hecho">Hecho por</p>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="o.autorizado_por"></span>
+                                                        <p class="hecho">Autorizado por</p>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="o.autorizado_por"></span>
+                                                        <p class="hecho">Recibido por</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </t>
+                    </div>
+                    <div t-if="o.cheque_formato == 'davivienda'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="davivienda">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="chq_fecha"><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> de <span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb"><span t-esc="o.partner_id.name" ></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <t t-if="o.reconciled_invoice_ids">
+                                                            <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                <span t-esc="fac.name"></span>/
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.ref"></span>
+                                                        </t>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td><span>Cuenta</span></td>
+                                                    <td><span>Descripción</span></td>
+                                                    <td><span>Debe</span></td>
+                                                    <td><span>Haber</span></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.move_id.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_dav">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td><span t-esc="o.user_id.name"></span></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+
+                    </div>
+                    <div t-if="o.cheque_formato == 'proamerica'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="proamerica">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="chq_fecha"><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> de <span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb"><span t-esc="o.partner_id.name" ></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <t t-if="o.reconciled_invoice_ids">
+                                                            <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                <span t-esc="fac.name"></span>/
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.ref"></span>
+                                                        </t>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td><span>Cuenta</span></td>
+                                                    <td><span>Descripción</span></td>
+                                                    <td><span>Debe</span></td>
+                                                    <td><span>Haber</span></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.move_id.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_pro">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="o.user_id.name"></span>
+                                                        <p class="hecho">Hecho por</p>
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                    <div t-if="o.cheque_formato == 'atlantida'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="atlantida">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="chq_fecha"><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> de <span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb"><span t-esc="o.partner_id.name" ></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <t t-if="o.reconciled_invoice_ids">
+                                                            <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                <span t-esc="fac.name"></span>/
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.ref"></span>
+                                                        </t>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td><span>Cuenta</span></td>
+                                                    <td><span>Descripción</span></td>
+                                                    <td><span>Debe</span></td>
+                                                    <td><span>Haber</span></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.move_id.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_atlantida">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="o.user_id.name"></span>
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </t>
+                    </div>
+                    <div t-if="o.cheque_formato == 'cuscatlan'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="cuscatlan">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="chq_fecha"><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> de <span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb"><span t-esc="o.partner_id.name" ></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <t t-if="o.reconciled_invoice_ids">
+                                                            <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                <span t-esc="fac.name"></span>/
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.ref"></span>
+                                                        </t>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table>
+                                            <tbody>
+                                                <t t-foreach="o.move_id.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_cuscatlan">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="o.user_id.name"></span>
+                                                    </td>
+                                                    <td></td>
+                                                    <td><span t-esc="o.amount"></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <template id="cheque_multi_formato_partidas">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.html_container">
+                    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                    <div t-if="o.cheque_formato == 'agricola'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="agricola">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> <span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount_total_signed" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb">
+                                                        <t t-if="o.partner_id">
+                                                            <span t-esc="o.partner_id.name" ></span>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.partner_partidas_id.name"></span>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <!--         <table>
+                                                     <tbody>
+                                                         <tr>
+                                                             <td colspan="2">
+                                                                 <t t-if="o.reconciled_invoice_ids">
+                                                                     <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                         <span t-esc="fac.name"></span>/
+                                                                     </t>
+                                                                 </t>
+                                                                 <t t-else="">
+                                                                     <span t-esc="o.ref"></span>
+                                                                 </t>
+                                                             </td>
+                                                         </tr>
+                                                     </tbody>
+                                                 </table>-->
+                                        <table>
+                                            <body>
+                                                <t t-foreach="o.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </body>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_agricola">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                    </td>
+                                                    <td> <span t-esc="o.user_id.name"></span></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                    <div t-if="o.cheque_formato == 'bac'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="bac">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="chq_fecha"><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/><span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount_total_signed" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb">
+                                                        <t t-if="o.partner_id">
+                                                            <span t-esc="o.partner_id.name" ></span>
+
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.partner_partidas_id.name"></span>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <!--<table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <t t-if="o.reconciled_invoice_ids">
+                                                            <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                <span t-esc="fac.name"></span>/
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.ref"></span>
+                                                        </t>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>-->
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td><span>Cuenta</span></td>
+                                                    <td><span>Descripción</span></td>
+                                                    <td><span>Debe</span></td>
+                                                    <td><span>Haber</span></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_bac">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="o.user_id.name"></span>
+                                                        <p class="hecho">Hecho por</p>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="o.autorizado_por"></span>
+                                                        <p class="hecho">Autorizado por</p>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="o.autorizado_por"></span>
+                                                        <p class="hecho">Recibido por</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </t>
+                    </div>
+                    <div t-if="o.cheque_formato == 'davivienda'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="davivienda">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="chq_fecha"><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> de <span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount_total_signed" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb">
+                                                        <t t-if="o.partner_id">
+                                                            <span t-esc="o.partner_id.name" ></span>
+
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.partner_partidas_id.name"></span>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <!--<table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <t t-if="o.reconciled_invoice_ids">
+                                                            <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                <span t-esc="fac.name"></span>/
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.ref"></span>
+                                                        </t>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>-->
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td><span>Cuenta</span></td>
+                                                    <td><span>Descripción</span></td>
+                                                    <td><span>Debe</span></td>
+                                                    <td><span>Haber</span></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_dav">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td><span t-esc="o.user_id.name"></span></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+
+                    </div>
+                    <div t-if="o.cheque_formato == 'proamerica'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="proamerica">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="chq_fecha"><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> de <span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount_total_signed" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb">
+                                                        <t t-if="o.partner_id">
+                                                            <span t-esc="o.partner_id.name" ></span>
+
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.partner_partidas_id.name"></span>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <!--<table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <t t-if="o.reconciled_invoice_ids">
+                                                            <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                <span t-esc="fac.name"></span>/
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.ref"></span>
+                                                        </t>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>-->
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td><span>Cuenta</span></td>
+                                                    <td><span>Descripción</span></td>
+                                                    <td><span>Debe</span></td>
+                                                    <td><span>Haber</span></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_pro">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="o.user_id.name"></span>
+                                                        <p class="hecho">Hecho por</p>
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                    <div t-if="o.cheque_formato == 'atlantida'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="atlantida">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="chq_fecha"><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> de <span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount_total_signed" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb">
+                                                        <t t-if="o.partner_id">
+                                                            <span t-esc="o.partner_id.name" ></span>
+
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.partner_partidas_id.name"></span>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <!--<table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <t t-if="o.reconciled_invoice_ids">
+                                                            <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                <span t-esc="fac.name"></span>/
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.ref"></span>
+                                                        </t>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>-->
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td><span>Cuenta</span></td>
+                                                    <td><span>Descripción</span></td>
+                                                    <td><span>Debe</span></td>
+                                                    <td><span>Haber</span></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_atlantida">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="o.user_id.name"></span>
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </t>
+                    </div>
+                    <div t-if="o.cheque_formato == 'cuscatlan'">
+                        <div class="header">
+                        </div>
+                        <t t-call="web.internal_layout">
+                            <div class="cuscatlan">
+                                <div class="page">
+                                    <div class="cheque">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="chq_fecha"><span>San salvador, <span t-esc="o.cheque_date.strftime('%d')"/> de <span t-esc="o.cheque_date.strftime('%B')"/> de <span class="chq_year" t-esc="o.cheque_date.strftime('%Y')"/></span></td>
+                                                    <td class="chq_amount"><span>****<span t-esc="o.amount_total_signed" t-options="{'widget': 'float', 'precision': 2}"></span>****</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up chq_nomb">
+                                                        <t t-if="o.partner_id">
+                                                            <span t-esc="o.partner_id.name" ></span>
+
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.partner_partidas_id.name"></span>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text_up"><span>****<span t-esc="o.amount_text"></span>****</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="middle_cheque"></div>
+                                    <div class="footer_cheque">
+                                        <div class="header_concepto">
+                                            <span t-esc="o.cheque_concepto"></span>
+                                        </div>
+                                        <!--<table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <t t-if="o.reconciled_invoice_ids">
+                                                            <t t-foreach="o.reconciled_invoice_ids" t-as="fac">
+                                                                <span t-esc="fac.name"></span>/
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="o.ref"></span>
+                                                        </t>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>-->
+                                        <table>
+                                            <tbody>
+                                                <t t-foreach="o.line_ids" t-as="move">
+                                                    <tr>
+                                                        <td><span t-field="move.account_id"></span></td>
+                                                        <td><span t-esc="move.name"></span></td>
+                                                        <td><span t-esc="move.debit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                        <td><span t-esc="move.credit" t-options="{'widget': 'float', 'precision': 2}"></span></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div class="footer_cheque_user_cuscatlan">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="o.user_id.name"></span>
+                                                    </td>
+                                                    <td></td>
+                                                    <td><span t-esc="o.amount_total_signed"></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

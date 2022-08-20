@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id= "pos_assets" inherit_id="point_of_sale.assets" name="POS Assets">
+		<xpath expr="." position="inside">
+			<link rel="stylesheet" href="/bi_pos_import_sale/static/src/css/pos.css" />
+			<script type="text/javascript" src="/bi_pos_import_sale/static/src/js/models.js"/>
+			<script type="text/javascript" src="/bi_pos_import_sale/static/src/js/Popups/SODetail.js"></script>
+			<script type="text/javascript" src="/bi_pos_import_sale/static/src/js/Popups/ImportSaleOrder.js"></script>
+			<script type="text/javascript" src="/bi_pos_import_sale/static/src/js/Screens/controlbutton.js"></script>
+			<script type="text/javascript" src="/bi_pos_import_sale/static/src/js/Screens/SaleOrderScreen.js"></script>
+			<script type="text/javascript" src="/bi_pos_import_sale/static/src/js/Screens/SaleOrders.js"></script>
+		</xpath>
+	</template>
+
+</odoo>

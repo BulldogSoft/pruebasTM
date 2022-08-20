@@ -1,0 +1,34 @@
+.info-contenedor
+{
+    display:none;
+    margin-bottom:15px;
+}
+.info-contenedor:first-child
+{
+    display:block;
+}
+
+.el-td
+{
+    color:black!important;
+    text-align:center;
+    font-size:25px!important;
+}
+.el-td-2
+{
+    text-align:center;
+}
+
+.tabla-partidas td, .tabla-partidas th
+{
+    border: 1px solid black !important;
+}
+#totales_1
+{
+    display:none;
+}
+#totales_1:last-child
+{
+    display:table-row;
+    width:100%;
+}

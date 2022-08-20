@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <template id="po_tm">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.html_container">
+                    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                    <div class="header header_po_bds">
+                        <div class="pre_header_po container">
+                            <div class="row">
+                                <div class="col-12 fecha text-left">
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 h_title">
+                                    <h3 t-esc="o.company_id.name"></h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-9 h_title mt-1">
+                                    <p t-esc="o.company_id.street"></p>
+                                </div>
+                                <div class="col-3 logo_gg">
+                                    <img src='/web/binary/company_logo'/>
+                                </div>
+                            </div>
+                            <div class="row preheader_uno">
+                                <div class="preheader_po_info">
+                                    <div class="row">
+                                        <div class="col-6 po_field">
+                                            <p>Telefono:</p><p>2000-0000</p>
+                                        </div>
+                                        <div class="col-6 po_field">
+                                            <p>Telefax: </p><p>2000-0000</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 po_field">
+                                            <p>NIT: </p> <p>000-00000-000-0</p>
+                                        </div>
+                                        <div class="col-6 po_field">
+                                            <p>NRC: </p> <p>0000-0</p>
+                                        </div>
+                                    </div>
+                                    <div class="row categoria_contri">
+                                        <div class="col-12 po_field_e">
+                                            <p>Categoría de contribuyente: <span t-esc="o.fiscal_position_id.name"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="preheader_po_email row m-0 p-0 p0">
+                                    <div class="col-2 m-0 p-0 p0">
+                                        <p><strong>Emails:</strong></p>
+                                    </div>
+                                    <div class="col-10 m-0 p-0 p0">
+                                        <p>example@supertiendamorena.com</p>
+                                        <p>example@supertiendamorena.com</p>
+                                        <p>example@supertiendamorena.com</p>
+                                        <p>example@supertiendamorena.com</p>
+                                        <p>example@supertiendamorena.com</p>
+
+                                    </div>
+                                </div>
+                                <div class="preheader_po_number">
+                                    <p>Orden de compra</p>
+                                    <h2 t-esc="o.name"></h2>
+                                </div>
+                            </div>
+
+                            <div class="row proheader_dos">
+                                <div class="preheader_po_info_2">
+                                    <div class="row">
+                                        <div class="col-5 po_field">
+                                            <p>Señores: <span t-esc="o.partner_id.name"></span></p>
+                                        </div>
+                                        <div class="col-7 po_field">
+                                            <p>Facturar a nombre:
+                                                <span t-esc="o.company_id.name"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5 po_field">
+                                            <p>Contácto: <span></span></p>
+                                        </div>
+                                        <div class="col-7 po_field">
+                                            <p>Entregar en: <span t-esc="o.company_id.street"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5 po_field">
+                                            <p>Teléfono: <span t-esc="o.partner_id.phone"></span></p>
+                                        </div>
+                                        <div class="col-7 po_field">
+                                            <p>Condiciones de embalaje: <span></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5 po_field">
+                                            <p>Fecha: <span t-esc="o.date_order.strftime('%D')"></span></p>
+                                        </div>
+                                        <div class="col-7 po_field">
+                                            <p>INCOTERMS: <span t-esc="o.incoterm_id.name"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5 po_field">
+                                            <p>Término:
+                                                <t t-if="o.payment_term_id.name == 'Pago inmediato'">
+                                                    <span>Contado</span>
+                                                </t>
+                                                <t t-if="o.payment_term_id.name != 'Pago inmediato'">
+                                                    <span>Crédito</span>
+                                                </t>
+                                            </p>
+                                        </div>
+                                        <div class="col-7 po_field">
+                                            <p>Emails: <span t-esc="o.partner_id.email"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5 po_field">
+                                            <p>Fecha Entrega: <span t-esc="o.date_planned.strftime('%D')"></span></p>
+                                        </div>
+                                        <div class="col-7 po_field">
+                                            <p>Nota: <span></span></p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <table class="report_tabla_po">
+                                <thead>
+                                    <tr>
+                                        <th><span>Código</span></th>
+                                        <th><span>Descripción</span></th>
+                                        <th><span>Cantidad</span></th>
+
+                                        <th><span>Unidad</span></th>
+                                        <th><span>Precio</span></th>
+                                        <th><span>Total</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.order_line" t-as="po">
+                                        <tr>
+                                            <td><span t-esc="po.product_id.default_code"/></td>
+                                            <td><span t-esc="po.product_id.name"/></td>
+                                            <td><span t-esc="po.product_qty"/></td>
+                                            <td><span t-esc="po.product_uom.name"></span></td>
+                                            <td><span>$</span><span t-esc="po.price_unit"/></td>
+                                            <td><span>$</span><span t-esc="po.price_subtotal"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <table class="footer_po last-page">
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td><span>Subtotal</span></td>
+                                        <td><span>$</span><span t-esc="o.amount_untaxed"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span ></span></td>
+                                        <td><span>I.V.A(13%)</span></td>
+                                        <td><span>$</span><span t-esc="'%.2f'%(o.amount_tax)"></span></td>
+                                    </tr>
+                                    <tr class="total_po">
+                                        <td><span>FAVOR FACTURAR CON LOS DATOS DE ESTA ORDEN</span></td>
+                                        <td ><span>TOTAL</span></td>
+                                        <td><span>$</span><span t-esc="'%.2f'%(o.amount_total)"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="footer">
+                            <h4 class="first-page">Observaciones</h4>
+                            <div class="condiciones first-page">
+                                <p>1. -Certificado de Análisis del Fabricante</p>
+                                <p>2. -Certificado de origen</p>
+                                <p>3. -Hojas de seguridad</p>
+                            </div>
+
+                            <div class="firmas_po row last-page">
+                                <div class="col-4 text-center">
+                                    <div class="linea"><span t-esc="o.user_id.name"></span></div>
+                                    <div class="texto"><span>Hecho por:</span></div>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <div class="linea"><span class="punto">.</span></div>
+                                    <div class="texto"><span>Autorizado por:</span></div>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <div class="linea"><span class="punto">.</span></div>
+                                    <div class="texto"><span>Autorizado por:</span></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<record model='ir.ui.view' id='multiple_invocie_journal'>
+			<field name='name'>pos.config.form</field>
+			<field name='model'>pos.config</field>
+			<field name='inherit_id' ref='point_of_sale.pos_config_view_form'/>
+			<field name='arch' type='xml'>
+				<xpath expr="//div[@id='auto_printing']" position="after">
+					<div class="col-12 col-lg-6 o_setting_box" id="secuencia_field">
+						<div class="o_setting_right_pane">
+							<span class="o_form_label">Secuencias</span>
+							<div class="text-muted">
+								Configurar las secuencias para esta caja
+							</div>
+							<div class="content-group">
+								<div class="row mt16">
+									<label string="Secuencia Ticket" for="secuencia_ticket" class="col-lg-3 o_light_label" widget="selection"/>
+									<field name="secuencia_ticket"></field>
+								</div>
+								<div class="row mt16">
+									<label string="Secuencia FCF" for="secuencia_fcf" class="col-lg-3 o_light_label" widget="selection"/>
+									<field name="secuencia_fcf"></field>
+								</div>
+								<div class="row mt16">
+									<label string="Secuencia CCF" for="secuencia_ccf" class="col-lg-3 o_light_label" widget="selection"/>
+									<field name="secuencia_ccf"></field>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-lg-6 o_setting_box" id="doctype_field">
+						<div class="o_setting_right_pane">
+							<label for="doctype_id"/>
+							<div class="text-muted">
+								Selecionar los tipos de documento
+							</div>
+							<field name="doctype_id" widget="many2many_tags"></field>
+						</div>
+					</div>
+				</xpath>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="pos_sale_order_secuencia">
+			<field name="name">pos.order.view.form</field>
+			<field name="model">pos.order</field>
+			<field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='partner_id']" position="after">
+					<field name="doctype_id"></field>
+					<field name="order_secuencia"></field>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_exp">
+            <t t-call="web.html_container">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                <div class="header">
+
+                </div>
+                <div t-att-data-oe-model="o._name" t-att-data-oe-id="o.id"
+                     t-att-data-oe-lang="o and o.env.context.get('lang')" class="page article">
+
+                    <div class="fex">
+                        <div class="datos-header">
+                            <style>
+                                #tabla-header
+                                {
+                                width: 100%;
+                                }
+                                #tabla-header span
+                                {
+                                text-align: left;
+                                font-size: 22px;
+                                color:black;
+                                text-transform: uppercase;
+                                }
+                                #tabla-header td
+                                {
+                                font-size: 22px;
+                                text-align: left;
+                                padding: 2px 6px;
+                                height: 15px;
+                                }
+                                .datos-header{
+                                border-bottom: 1px solid black;
+                                }
+
+                            </style>
+                            <table id="tabla-header">
+                                <tr>
+                                    <td style="width:10%">
+                                        NOMBRE:
+                                    </td>
+                                    <td style="width:50%">
+                                        <span t-field="o.partner_id.name"/>
+                                    </td>
+                                    <td style="width:10%">
+                                        NIT o DUI:
+                                    </td>
+                                    <td style="width:30%">
+                                        <span t-if="o.partner_id.nit">
+                                            <span t-field="o.partner_id.nit"/>
+                                        </span>
+                                        <span t-else="">
+                                            <span t-field="o.partner_id.dui"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        DIRECCION:
+                                    </td>
+                                    <td>
+                                        <span t-if="o.partner_id.street">
+                                            <span t-field="o.partner_id.street"/>
+                                        </span>
+                                        <span t-if="o.partner_id.street2">
+                                            , <span t-field="o.partner_id.street2"/>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        CONDICIONES:
+                                    </td>
+                                    <td>
+                                        <span t-field="o.invoice_payment_term_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        DEPARTAMENTO:
+                                    </td>
+                                    <td>
+                                        <span t-field="o.partner_id.state_id"/>
+                                    </td>
+                                    <td>
+                                        FECHA:
+                                    </td>
+                                    <td>
+                                        <span t-field="o.invoice_date"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        CORRELATIVO:
+                                    </td>
+                                    <td>
+                                        <span t-field="o.name"/>
+                                    </td>
+                                    <td>
+                                        DOC.ORIGEN:
+                                    </td>
+                                    <td>
+                                        <span t-field="o.invoice_origin"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="datos-products" style="height: 1200px;">
+                            <style>
+                                #tabla-productos
+                                {
+                                width: 100%;
+                                }
+
+                                #tabla-productos td
+                                {
+                                font-size: 22px;
+                                text-transform: uppercase;
+                                padding: 2px 6px;
+                                }
+                                #tabla-productos th{
+                                padding: 2px 6px;
+                                font-size: 22px;
+                                }
+
+                            </style>
+                            <table id="tabla-productos">
+                                <thead>
+                                    <tr class="text-center" style="border-bottom: 1px solid black">
+                                        <td style="width:10%">CANTIDAD</td>
+                                        <td style="width:15%">CODIGO</td>
+                                        <td style="width:55%">DESCRIPCION</td>
+                                        <td style="width:10%">PRECIO <br/>UNITARIO</td>
+                                        <td style="width:10%">VENTAS <br/>AFECTAS</td>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="invoice_tbody">
+                                    <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                        <td class="text-center">
+                                            <span t-field="l.quantity"/>
+                                            <span t-field="l.uom_id" groups="product.group_uom"/>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <span t-field="l.product_id.default_code"/>
+                                        </td>
+
+                                        <td class="text-justify">
+                                            <span t-field="l.product_id.name"/>
+                                            <t t-esc="', '.join(l.product_id.product_template_attribute_value_ids.mapped('name'))"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-esc="l.price_unit"
+                                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+
+                                        <td>
+                                            <span t-esc="l.price_subtotal"
+                                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="total">
+                            <style>
+                                #tabla-total
+                                {
+                                width: 100%;
+                                }
+
+                                #tabla-total td
+                                {
+                                font-size: 22px;
+                                text-transform: uppercase;
+                                padding: 2px 6px;
+                                }
+                            </style>
+                            <table id="tabla-total">
+                                <tr style="border-top: 1px solid black">
+                                    <td style="width:10%">SON:</td>
+                                    <td style="width:60%;" class="text-center" rowspan="2">
+                                        <span t-field="o.num_word"/>
+                                    </td>
+                                    <td style="width:15%">VENTA TOTAL</td>
+                                    <td style="width:15%">
+                                        <span t-esc="float(o.amount_total)"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

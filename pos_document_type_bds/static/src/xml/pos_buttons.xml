@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_multiple_invoice_journal" inherit_id="point_of_sale.template" xml:space="preserve">
+
+	<t t-name="PaymentScreen" t-inherit="point_of_sale.PaymentScreen" t-inherit-mode="extension" owl="1">
+		<xpath expr="//div[hasclass('right-content')]//div[hasclass('payment-buttons-container')]/div[hasclass('payment-buttons')]" position="inside">
+			<div class="multipleinvoice-container">
+				<div class="doctype_title">
+					Tipo de Documento
+				</div>
+				<div class="invoicejournal-container">
+					<div class='invoicejournalmethods'>
+						<t t-foreach="env.pos.vals" t-as="doctype" t-att-data-id="doctype.id">
+							<DoctypeButton doctype="doctype" />
+						</t>
+					</div>
+				</div>
+			</div>
+
+		</xpath>
+	</t>
+</templates>
+

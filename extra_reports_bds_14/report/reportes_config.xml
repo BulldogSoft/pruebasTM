@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="reporte_top_css" inherit_id="web.report_assets_pdf">
+            <xpath expr="."  position="inside">
+                <link  rel="stylesheet" type="text/css" href="/extra_reports_bds_14/static/src/extra_reports.scss"/>
+                <link  rel="stylesheet" type="text/css" href="/extra_reports_bds_14/static/src/pago_recibo.scss"/>
+                <link  rel="stylesheet" type="text/css" href="/extra_reports_bds_14/static/src/mercaderia.scss"/>
+            </xpath>
+        </template>
+        <!--PO TM -->
+        <report
+                id="po_tm_report"
+                string="Orden de compra TM"
+                model="purchase.order"
+                report_type="qweb-pdf"
+                name="extra_reports_bds_14.po_tm"
+                file="extra_reports_bds_14.po_tm"
+        />
+        <record id="paperformat_po_tm" model="report.paperformat">
+            <field name="name">PO TM</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <!-- margin_top empuja hacia abajo documento incluyendo solo al  header y body-->
+            <field name="margin_top">85</field>
+            <field name="margin_bottom">55</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False"/>
+            <!--Header_spacing empuja el header hacia arriba-->
+            <field name="header_spacing">78</field>
+            <!--Dpi funciona como un zoom, el valor por defecto es 90-->
+            <field name="dpi">95</field>
+        </record>
+        <record id="extra_reports_bds_14.po_tm_report" model="ir.actions.report">
+            <field name="paperformat_id" ref="extra_reports_bds_14.paperformat_po_tm" />
+        </record>
+
+        <!--Payment TM-->
+        <report
+                id="payment_tm_report"
+                string="Recibo de pago TM"
+                model="account.payment"
+                report_type="qweb-pdf"
+                name="extra_reports_bds_14.payment_tm"
+                file="extra_reports_bds_14.payment_tm"
+        />
+        <record id="paperformat_payment_tm" model="report.paperformat">
+            <field name="name">Recibo de Pago TM</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <!-- margin_top empuja hacia abajo documento incluyendo solo al  header y body-->
+            <field name="margin_top">85</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <!--Header_spacing empuja el header hacia arriba-->
+            <field name="header_spacing">78</field>
+            <!--Dpi funciona como un zoom, el valor por defecto es 90-->
+            <field name="dpi">100</field>
+        </record>
+
+        <record id="extra_reports_bds_14.payment_tm_report" model="ir.actions.report">
+            <field name="paperformat_id" ref="extra_reports_bds_14.paperformat_payment_tm" />
+        </record>
+
+
+        <report
+                id="mercaderia_report"
+                string="Recepción de Mercaderia TM"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="extra_reports_bds_14.mercaderia_tm"
+                file="extra_reports_bds_14.mercaderia_tm"
+                menu="False"
+        />
+        <record id="paperformat_mercaderia_tm" model="report.paperformat">
+            <field name="name">Recepción Mercaderia TM</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <!-- margin_top empuja hacia abajo documento incluyendo solo al  header y body-->
+            <field name="margin_top">63</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False"/>
+            <!--Header_spacing empuja el header hacia arriba-->
+            <field name="header_spacing">57</field>
+            <!--Dpi funciona como un zoom, el valor por defecto es 90-->
+            <field name="dpi">95</field>
+        </record>
+        <record id="extra_reports_bds_14.mercaderia_report" model="ir.actions.report">
+            <field name="paperformat_id" ref="extra_reports_bds_14.paperformat_mercaderia_tm" />
+        </record>
+
+    </data>
+</odoo>

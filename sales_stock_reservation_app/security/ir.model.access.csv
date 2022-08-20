@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_reserved_stock,access_reserved_stock,model_reserved_stock,,1,1,1,1
+access_stock_reserve,access_stock_reserve,model_stock_reserve,base.group_user,1,1,1,0
+
+access_stock_reserve_line,access_stock_reserve_line,model_stock_reserve_line,base.group_user,1,1,1,0

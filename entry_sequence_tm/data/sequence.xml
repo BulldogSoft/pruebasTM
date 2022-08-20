@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Sequences -->
+
+        <record id="seq_entry_diarios" model="ir.sequence">
+            <field name="name">Partidas de Diarios</field>
+            <field name="code">sequence.diarios</field>
+            <field name="prefix"></field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_entry_ingresos" model="ir.sequence">
+            <field name="name">Partidas de Ingresos</field>
+            <field name="code">sequence.ingresos</field>
+            <field name="prefix"></field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_entry_remesas" model="ir.sequence">
+            <field name="name">Partidas de Remesas</field>
+            <field name="code">sequence.remesas</field>
+            <field name="prefix"></field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_entry_banco" model="ir.sequence">
+            <field name="name">Partidas de Banco</field>
+            <field name="code">sequence.banco</field>
+            <field name="prefix"></field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

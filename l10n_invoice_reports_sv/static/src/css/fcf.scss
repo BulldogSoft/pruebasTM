@@ -1,0 +1,141 @@
+.pre_header_tm_fcf{
+    width:100%;
+    height: 160px;
+    padding:0;
+    margin:0;
+}
+.header_info_tm_fcf{
+    width:100%;
+    height: 100px;
+    padding:0;
+    margin:0;
+    table{
+        width:100%;
+        tbody{
+            tr{
+              td{
+                padding: 5px;
+              }
+              &:nth-child(1){
+                td{
+                    &:nth-child(1){
+                        width:70%;
+                    }
+                    &:nth-child(2){
+                        width:30%;
+                        text-align:center;
+                    }
+                }
+              }
+              &:nth-child(2){
+                td{
+                    &:nth-child(1){
+                        padding-left:90px;
+                    }
+                }
+              }
+
+              &:nth-child(3){
+                td{
+                    &:nth-child(1){
+                        width:35%!important;
+                        padding-left:90px;
+                    }
+                    &:nth-child(2){
+                        width:65%!important;
+                        text-align:left;
+                    }
+                }
+              }
+            }
+        }
+    }
+}
+.productos_fcf{
+    table{
+        width:97%;
+        margin-left:3%;
+        tbody{
+            tr{
+                td{
+                    &:nth-child(1){
+                        width:50%;
+                    }
+                    &:nth-child(2){
+                        width:9%;
+                        text-align:center!important;
+
+                    }
+                    &:nth-child(3){
+                        width:9%;
+                        text-align:right;
+
+                    }
+                    &:nth-child(4){
+                        width:9%;
+                        text-align:right;
+
+                    }
+                    &:nth-child(5){
+                        width:9%;
+                        text-align:right;
+
+                    }
+                    &:nth-child(6){
+                        width:14%;
+                        text-align:right;
+                    }
+                }
+            }
+        }
+    }
+}
+.footer_tm_fcf{
+    .footer_container{
+        width: 97%;
+        margin-left: 3%;
+        display:flex;
+        .footer_left{
+            width:50%;
+            span{
+                text-transform:uppercase;
+                padding-left: 30px;
+            }
+        }
+        .footer_right{
+            width:50%;
+            table{
+                width:100%;
+                .punto{
+                    color:white;
+                }
+                tr{
+                    td{
+
+                        &:nth-child(1){
+                            width:20%;
+                        }
+                          &:nth-child(2){
+                            width:18%;
+                        }
+                          &:nth-child(3){
+                            width:18%;
+
+                        }
+                          &:nth-child(4){
+                            width:18%;
+                        }
+                          &:nth-child(5){
+                            width:26%;
+                            text-align: right;
+                        }
+
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+

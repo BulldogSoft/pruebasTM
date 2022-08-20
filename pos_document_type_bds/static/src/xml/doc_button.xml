@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<t t-name="DoctypeButton" owl="1">
+		<div class="button doctypemethod" t-on-click="trigger('new-doctype-line',props.doctype)" >
+			<div class="doctype-name" t-att-data-product-id="props.doctype.id" t-on-click="click_set_doctype" t-att-id="props.doctype.id" >
+				<div class="doctype_name" >
+					<t t-esc="props.doctype.name" />
+				</div>
+			</div>
+		</div>
+	</t>
+</templates>

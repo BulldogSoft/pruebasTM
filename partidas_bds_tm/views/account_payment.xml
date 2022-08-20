@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_account_move_form_cheque" model="ir.ui.view">
+        <field name="name">account.move.form.cheque</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='journal_div']" position="after">
+                <field name="is_dcl"   attrs="{'invisible': [('move_type', '!=', 'entry')]}"></field>
+                <field name="dcl_serie" attrs="{'invisible':[('is_dcl', '==', False)]}"></field>
+                <field name="dcl_resolucion" attrs="{'invisible':[('is_dcl', '==', False)],'required':[('is_dcl', '==', True)]}"></field>
+                <field name="dcl_documento" attrs="{'invisible':[('is_dcl', '==', False)]}"></field>
+            </xpath>
+        </field>
+    </record>
+</odoo>

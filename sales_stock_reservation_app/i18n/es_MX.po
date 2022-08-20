@@ -1,0 +1,305 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sales_stock_reservation_app
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-22 21:28+0000\n"
+"PO-Revision-Date: 2021-12-22 23:24-0600\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Language: es_MX\n"
+
+#. module: sales_stock_reservation_app
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.stock_reserve_configuration_form_view
+msgid "<span class=\"o_form_label\">Destination Location</span>"
+msgstr "<span class=\"o_form_label\">Ubicación de destino</span>"
+
+#. module: sales_stock_reservation_app
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.stock_reserve_configuration_form_view
+msgid "<span class=\"o_form_label\">Source Location</span>"
+msgstr "<span class=\"o_form_label\">Ubicación Origen</span>"
+
+#. module: sales_stock_reservation_app
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.stock_reserve_wizard_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: sales_stock_reservation_app
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.sale_stock_reserve_sale_view
+msgid "Cancel Reserve Stock"
+msgstr "Cancelar reserva"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields.selection,name:sales_stock_reservation_app.selection__reserved_stock__state__cancelled
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_sale_order__check_stock
+msgid "Check Stock"
+msgstr "Verificar existencias"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model,name:sales_stock_reservation_app.model_res_config_settings
+msgid "Config Settings"
+msgstr "Configuraciones"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__create_uid
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve__create_uid
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__create_date
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve__create_date
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: sales_stock_reservation_app
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.stock_reserve_configuration_form_view
+msgid "Default Stock Reserve Location"
+msgstr "Ubicación para las Reservas"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_res_config_settings__location_dest_id
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__location_dest_id
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.stock_reserve_configuration_form_view
+msgid "Destination Location"
+msgstr "Ubicación Destino"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__display_name
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_sale_order__display_name
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve__display_name
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields.selection,name:sales_stock_reservation_app.selection__reserved_stock__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_sale_order__stock_reservation
+msgid "Enable Stock Reservation"
+msgstr "Activar Reserva de Productos"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_res_config_settings__id
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__id
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_sale_order__id
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve__id
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock____last_update
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_sale_order____last_update
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve____last_update
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__write_uid
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve__write_uid
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__write_date
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve__write_date
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve__notify_user
+msgid "Notify User"
+msgstr "Notificar al usuario"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__order_line_id
+msgid "Order Line"
+msgstr "Línea de órdenes"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__product_qty
+msgid "Order Quantity"
+msgstr "Cantidad pedida"
+
+#. module: sales_stock_reservation_app
+#: code:addons/sales_stock_reservation_app/wizard/reserve_stock_wizard.py:0
+#, python-format
+msgid "Please Select Source & Destination Location in Inventory Configuration !"
+msgstr "Seleccione la ubicación de origen y destino en la configuración del inventario !"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__product_id
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: sales_stock_reservation_app
+#: code:addons/sales_stock_reservation_app/wizard/reserve_stock_wizard.py:0
+#, python-format
+msgid "Product not have enough on hand quantity to reserve !"
+msgstr "El producto no tiene suficiente cantidad disponible para reservar !"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__product_qty
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__reference
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: sales_stock_reservation_app
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.stock_reserve_wizard_view
+msgid "Reserve"
+msgstr "Reservar"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__reserve_qty
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__reserve_qty
+msgid "Reserve Quantity"
+msgstr "Cantidad a Reservar"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__user_id
+msgid "Reserve Request By"
+msgstr "Reserva solicitada por"
+
+#. module: sales_stock_reservation_app
+#: model:ir.actions.act_window,name:sales_stock_reservation_app.stock_reserve_action
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.sale_stock_reserve_sale_view
+msgid "Reserve Stock"
+msgstr "Reservar"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields.selection,name:sales_stock_reservation_app.selection__reserved_stock__state__reserved
+msgid "Reserved"
+msgstr "Reservado"
+
+#. module: sales_stock_reservation_app
+#: code:addons/sales_stock_reservation_app/models/reserved_stock.py:0
+#: model:ir.actions.act_window,name:sales_stock_reservation_app.reserved_stock_action
+#: model:ir.ui.menu,name:sales_stock_reservation_app.reserved_stock_menu
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.reserved_stock_form_view
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.reserved_stock_graph_view
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.reserved_stock_pivot_view
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.reserved_stock_tree_view
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.sale_stock_reserve_sale_view
+#, python-format
+msgid "Reserved Stock"
+msgstr "Inventario Reservado"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model,name:sales_stock_reservation_app.model_reserved_stock
+msgid "Reserved Stock from Sales"
+msgstr "Inventario reservado desde ventas"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__sale_order
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve__sale_order
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__order_line_id
+msgid "Sale Order"
+msgstr "Orden de venta"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model,name:sales_stock_reservation_app.model_sale_order
+msgid "Sales Order"
+msgstr "Órdenes de venta"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model,name:sales_stock_reservation_app.model_stock_reserve
+msgid "Sales Stock Reserve"
+msgstr "Reserva de existencias para venta"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model,name:sales_stock_reservation_app.model_stock_reserve_line
+msgid "Sales Stock Reserve Line"
+msgstr "Línea de reserva de existencias para ventas"
+
+#. module: sales_stock_reservation_app
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.stock_reserve_wizard_view
+msgid "Select User to Send Email"
+msgstr "Seleccione el usuario que desea enviar el correo electrónico"
+
+#. module: sales_stock_reservation_app
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.stock_reserve_configuration_form_view
+msgid "Select destination location to reserve stock."
+msgstr "Seleccione bodega de destino para reservar el stock."
+
+#. module: sales_stock_reservation_app
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.stock_reserve_configuration_form_view
+msgid "Select source location to reserve stock."
+msgstr "Seleccione bodega origen para reservar el stock."
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_res_config_settings__location_id
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__location_id
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.stock_reserve_configuration_form_view
+msgid "Source Location"
+msgstr "Ubicación Origen"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__state
+msgid "Status"
+msgstr "Estado"
+
+#. module: sales_stock_reservation_app
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.reserved_stock_form_view
+msgid "Stock Location"
+msgstr "Ubicación de Inventario"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_sale_order__reserved_stock_ids
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve__stock_reserve_line
+#: model_terms:ir.ui.view,arch_db:sales_stock_reservation_app.stock_reserve_wizard_view
+msgid "Stock Reserve"
+msgstr "Reserva de Inventario"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__stock_reserve_line_id
+msgid "Stock Reserve Line"
+msgstr "Línea de reserva de Inventario"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_stock_reserve_line__product_uom
+msgid "Unit of Measure"
+msgstr "Unidad de medida"
+
+#. module: sales_stock_reservation_app
+#: model:ir.model.fields,field_description:sales_stock_reservation_app.field_reserved_stock__view_on_sale
+msgid "View On Sale"
+msgstr "Ver en la Venta"
+
+#. module: sales_stock_reservation_app
+#: code:addons/sales_stock_reservation_app/wizard/reserve_stock_wizard.py:0
+#, python-format
+msgid "You can not reserve consumable or service type product !"
+msgstr "¡No se puede reservar un producto de tipo consumible o de tipo servicio!"

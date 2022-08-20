@@ -1,0 +1,40 @@
+<?xml version = "1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherited employee form view -->
+    <record id="view_product_type_form" model="ir.ui.view">
+        <field name="name">view.product.type.form</field>
+        <field name="model">product.type</field>
+        <field name="arch" type="xml">
+            <form string="Tipo de Producto">
+                <sheet>
+                    <group name="datos">
+                        <group name="datos_left" string="Datos">
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+               </form>
+        </field>
+    </record>
+
+        <record id="view_product_type_tree" model="ir.ui.view">
+        <field name="name">view.product.type.tree</field>
+        <field name="model">product.type</field>
+        <field name="arch" type="xml">
+            <tree string="Tipo de Producto">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+        <record id="product_type_action" model="ir.actions.act_window">
+        <field name="name">Tipo de producto</field>
+        <field name="res_model">product.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+	<!--  Menu Items-->
+    <menuitem name="Tipo de Producto" id="product_type_menu" parent="stock.menu_stock_config_settings"
+              action="product_type_action" sequence="200"/>
+</odoo>

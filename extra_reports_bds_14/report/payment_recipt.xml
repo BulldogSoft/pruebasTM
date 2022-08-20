@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="payment_tm">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.html_container">
+                    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                    <div class="header header_pago_bds">
+                        <div class="pago_header">
+                            <div class="direccion">
+                                <div class="logo_tm">
+                                    <img src='/web/binary/company_logo'/>
+                                </div>
+                                <p><span t-esc="o.company_id.name"></span></p>
+                                <p><span t-esc="o.branch_id.address"></span></p>
+                            </div>
+                            <div class="nombre">
+                                <p><span t-esc="o.name"></span></p>
+                            </div>
+                            <div class="info">
+                                <p><span>Fecha: </span><span t-esc="o.date"></span></p>
+                                <p><span>Responsable: </span><span t-esc="o.user_id.name"></span></p>
+                                <p><span>Sucursal: </span><span t-esc="o.branch_id.name"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <t t-call="web.internal_layout">
+                        <div class="pago_recibo">
+                            <div class="page">
+                                <table class="report_tabla_pago">
+                                    <thead>
+                                        <tr>
+                                            <th><span>Fecha</span></th>
+                                            <th><span>N° Doc ODOO</span></th>
+                                            <th><span>N° Documento</span></th>
+                                            <th><span>Concepto</span></th>
+                                            <th><span>Total</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="total" t-value="0"></t>
+                                        <t  t-foreach="o.move_id._get_reconciled_invoices_partials()" t-as="rec">
+                                            <t t-set="amount" t-value="rec[1]"/>
+                                            <t t-set="fac" t-value="rec[2].move_id"/>
+                                            <t t-if="fac.move_type != 'entry'">
+                                                <tr>
+                                                    <td><span t-esc="fac.invoice_date"/></td>
+                                                    <td><span t-esc="fac.name"/></td>
+                                                    <td><span t-esc="fac.ref"/></td>
+                                                    <td><span t-esc="fac.concepto_factura"></span></td>
+                                                    <td><span t-esc="amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/><t t-set="total" t-value="total + amount"></t></td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <tr class="total_fac">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Total</td>
+                                            <td><span>$</span><span t-esc="total" t-options='{"widget": "float", "precision": 2}'></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="footer">
+                                <div class="firmas_po row last-page">
+                                    <div class="col-4 text-center">
+                                        <div class="linea"><span class="punto">.</span></div>
+                                        <div class="texto"><span>Revisado por:</span></div>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <div class="linea"><span t-esc="o.user_id.name"></span></div>
+                                        <div class="texto"><span>Elaborado por:</span></div>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <div class="linea texto"><span class="punto">.</span></div>
+                                        <div class="texto"><span>Autorizado por:</span></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

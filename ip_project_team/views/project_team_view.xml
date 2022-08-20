@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    	<record id="project_team_view_form" model="ir.ui.view">
+            <field name="name">project.team.form.view</field>
+            <field name="model">project.team</field>
+            <field name="arch" type="xml">
+                <form string="Equipos">
+                    <sheet>
+                    	<div class="oe_title">
+                            <label for="name" class="oe_inline" string="Nombre del Equipo:"/>
+	                        <h1><field name="name" placeholder="Ejm.: Mercadeo"/></h1>
+	                    </div>
+	                    <group>
+                            <group>
+                            	<field name="user_id" widget="res_partner_many2one" string="Lider del Equipo:"/>
+                            </group>
+                            <group>
+		                        <field name="team_members" widget="many2many_tags" string="Miembros del equipo:"/>
+                            </group>
+	                    </group>
+			        </sheet>
+                </form>
+            </field>
+        </record>
+    	<record id="project_team_view_tree" model="ir.ui.view">
+            <field name="name">project.team.tree.view</field>
+            <field name="model">project.team</field>
+            <field name="arch" type="xml">
+                <tree string="Equipos">
+                    <field name="name" string="Equipo"/>
+                    <field name="user_id" string="Lider del Equipo"/>
+                    <field name="team_members" string="Miembros del Equipo" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+    	<record id="action_project_team" model="ir.actions.act_window">
+            <field name="name">Equipos</field>
+            <field name="res_model">project.team</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a New Project Team
+                </p><p>
+                    Organize your activities for internal, personal or customer team.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_project_team" name="Equipo de proyectos" parent="project.menu_project_config" action="action_project_team" groups="base.group_erp_manager"/>
+    </data>
+</odoo>
