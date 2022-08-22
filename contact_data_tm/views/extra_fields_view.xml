@@ -7,12 +7,13 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
-
+                
                 <xpath expr="//field[@name='payment_reference']" position="after">
-                    <field name="n_resolucion" attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'entry'))]}"/>
-                    <field name="n_serie" attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'entry'))]}"/>
+                    <field name="n_resolucion" attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'entry'))], 'required': [('move_type', 'in', ('in_invoice', 'in_refund'))]}"/>
+                    <field name="n_serie" attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'entry'))], 'required': [('move_type', 'in', ('in_invoice', 'in_refund'))]}"/>
                     <field name="tipo_documento_diarios" attrs="{'invisible': [('move_type', 'not in', 'entry')]}"/>
                     <field name="tipo_compra" attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund'))]}"/>
+                    <field name="nota_tm"/>
                 </xpath>
 
                 <xpath expr="//div[@name='journal_div']" position="after">
@@ -23,6 +24,14 @@
                     <attribute name="attrs">{'readonly': [('move_type', 'in', ('in_invoice', 'in_refund'))]}</attribute>
                     <attribute name="force_save">1</attribute>
                 </xpath>
+                
+                <xpath expr="//field[@name='ref']" position="attributes">
+                    <attribute name="attrs">{'required': [('move_type', 'in', ('in_invoice', 'in_refund'))]}</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='invoice_date']" position="attributes">
+                    <attribute name="attrs">{'required': [('move_type', 'in', ('in_invoice', 'in_refund'))]}</attribute>
+                </xpath>
             </field>
         </record>
 
@@ -32,11 +41,18 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
+                
+                <xpath expr="//field[@name='dui']" position="attributes">
+                    <attribute name="attrs">{'required': [('company_type', 'in', 'person')], 'invisible': [('company_type', 'in', 'company')]}</attribute>
+                </xpath>
                 <xpath expr="//field[@name='giro']" position="attributes">
-                    <attribute name="attrs">{'required': [('contribuyente_type', 'not in', ('internacionales', 'nosujeto', 'sujexculido'))]}</attribute>
+                    <attribute name="attrs">{'required': [('contribuyente_type', 'not in', ('internacionales', 'nosujeto', 'sujexculido', 'exento'))]}</attribute>
                 </xpath>
                  <xpath expr="//field[@name='nrc']" position="attributes">
                     <attribute name="attrs">{'required': [('contribuyente_type', 'not in', ('internacionales', 'nosujeto', 'sujexculido'))]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='nit']" position="attributes">
+                    <attribute name="attrs">{'required': [('contribuyente_type', 'not in', 'internacionales')]}</attribute>
                 </xpath>
 
             </field>
