@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+      <data>
+          <record id="view_reject" model="ir.ui.view">
+                <field name="name">Reject Reason </field>
+                <field name="model">sale.discount.reject</field>
+                <field name="arch" type="xml">
+                  <form string="Reject Reason">
+                      <group>
+                          <field name="reason"/>
+                      </group>
+                      <footer>
+                          <button name="action_apply" string="Save"  type="object" class="btn-primary"/>
+                          <button string="Cancel" class="btn-secondary" special="cancel" />
+                      </footer>
+                  </form>
+                </field>
+          </record>
+
+          <act_window id="action_reject"
+              name="Price List"
+              res_model="sale.discount.reject"
+              binding_model="sale.discount.reject"
+              binding_type="report"
+              view_mode="form" target="new" />
+
+
+           <record id="view_discount_policy_sale" model="ir.ui.view">
+              <field name="name">view.discount.policy.sale</field>
+              <field name="model">sale.order</field>
+              <field name="inherit_id" ref="sale.view_order_form"/>
+              <field name="arch" type="xml">
+                <xpath expr="//sheet/div" position="after">
+                    <widget name="web_ribbon" title="In Approval" bg_color="bg-primary"  attrs="{'invisible': [('is_discout_flow', '=', False)]}"/>
+                    <widget name="web_ribbon" title="Approved" attrs="{'invisible': [('is_discout_approved', '=', False)]}"/>
+                    <widget name="web_ribbon" title="Rejected" bg_color="bg-danger" attrs="{'invisible': [('is_discout_rejected', '=', False),('is_reject_reason','=',False)]}"/>
+                </xpath>
+
+                  <xpath expr="//header/button[@name='action_quotation_send']" position="replace"/>
+                  <xpath expr="//header/button[@name='action_quotation_send']" position="replace"/>
+                  <xpath expr="//header/button[@name='action_confirm']" position="replace"/>
+                  <xpath expr="//header/button[@name='action_confirm']" position="replace"/>
+                  <xpath expr="//header/button[@name='payment_action_void']" position="after">
+                    <button name="action_quotation_send" string="Send by Email" type="object"  class="btn-primary" attrs="{'invisible': ['|','|',('is_warning', '=', True),('state', 'not in',('draft')),('is_discout_rejected', '=', True)]}"/>
+                    <button name="action_quotation_send" type="object" string="Send PRO-FORMA Invoice" groups="sale.group_proforma_sales" class="btn-primary" attrs="{'invisible': ['|','|','|',('state', '!=', 'draft'), ('invoice_count','&gt;=',1),('is_warning', '=', True),('is_discout_rejected', '=', True)]}" context="{'proforma': True}"/>
+                  </xpath>
+                  <xpath expr="//header/button[@name='action_quotation_send']" position="after">
+                     <button name="action_confirm" id="action_confirm" string="Confirm" class="btn-primary" type="object" attrs="{'invisible': ['|','|',('state', 'not in', ['sent']),('is_warning', '=', True),('is_discout_rejected', '=', True)]}"/>
+                     <button name="action_confirm" string="Confirm" type="object" attrs="{'invisible': ['|','|',('state', 'not in', ['draft']),('is_warning', '=', True),('is_discout_rejected', '=', True)]}"/>
+                  </xpath>
+
+                <button name="action_cancel" position="after">
+                  <button 
+                      name="action_discount" 
+                      type="object" 
+                      string="Ask for Discount Approval"
+                      attrs="{'invisible': ['|','|','|',('is_discout_flow', '=', True),('is_discout_approved','=',True),('state','in',('sale','done','cancel')),('is_warning', '=', False)]}" 
+                      class="oe_highlight" 
+                      /> 
+                 <button 
+                    name="%(action_reject)d" 
+                    type="action" 
+                    string="Reject Discount"
+                    attrs="{'invisible': ['|','|','|','|',('is_sales_manager' ,'=', False),('is_discout_rejected', '=', True),('is_discout_approved','=',True),('is_discout_flow','=',False),('state','in',('sale','done','cancel'))]}" 
+                    class="oe_highlight" 
+                    /> 
+                 <button 
+                    name="action_approved" 
+                    type="object" 
+                    string="Approve Discount"
+                    attrs="{'invisible': ['|','|','|','|',('is_sales_manager' ,'=', False),('is_discout_rejected','=',True),('is_discout_flow','=',False),('is_discout_approved','=',True),('state','in',('sale','done','cancel'))]}" 
+                    class="oe_highlight" 
+                    /> 
+                  <button 
+                    name="action_draft" 
+                    type="object" 
+                    string="Reset To Draft"
+                    attrs="{'invisible': ['|',('is_discout_approved','=',False),('state','in',('sale','done','cancel'))]}" 
+                    class="oe_highlight" 
+                    /> 
+              </button>
+              <field name="partner_id" position="attributes">
+                <attribute name="attrs">{'readonly': ['|','|',('is_discout_flow', '=', True),('is_discout_approved', '=', True),('is_discout_hide', '=', True)]}</attribute>
+              </field>
+              <field name="payment_term_id" position="attributes">
+                <attribute name="attrs">{'readonly': ['|','|',('is_discout_flow', '=', True),('is_discout_approved', '=', True),('is_discout_hide', '=', True)]}</attribute>
+              </field>
+              <field name="validity_date" position="attributes">
+                <attribute name="attrs">{'readonly': ['|','|',('is_discout_flow', '=', True),('is_discout_approved', '=', True),('is_discout_hide', '=', True)]}</attribute>
+              </field>
+              <field name="date_order" position="attributes">
+                <attribute name="attrs">{'readonly': ['|','|',('is_discout_flow', '=', True),('is_discout_approved', '=', True),('is_discout_hide', '=', True)]}</attribute>
+              </field>
+              <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                 <attribute name="attrs">{'readonly': ['|','|',('parent.is_discout_flow', '=', True),('parent.is_discout_approved', '=', True),('parent.is_discout_hide', '=', True)]}</attribute>
+              </xpath>
+               <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="attributes">
+                 <attribute name="attrs">{'readonly': ['|','|',('parent.is_discout_flow', '=', True),('parent.is_discout_approved', '=', True),('parent.is_discout_hide', '=', True)]}</attribute>
+              </xpath>
+               <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes">
+                 <attribute name="attrs">{'readonly': ['|','|',('parent.is_discout_flow', '=', True),('parent.is_discout_approved', '=', True),('parent.is_discout_hide', '=', True)]}</attribute>
+              </xpath>
+              <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                 <attribute name="attrs">{'readonly': ['|','|',('parent.is_discout_flow', '=', True),('parent.is_discout_approved', '=', True),('parent.is_discout_hide', '=', True)]}</attribute>
+              </xpath>
+              <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']" position="attributes">
+                 <attribute name="attrs">{'readonly': ['|','|',('parent.is_discout_flow', '=', True),('parent.is_discout_approved', '=', True),('parent.is_discout_hide', '=', True)]}</attribute>
+              </xpath>
+
+              <field name="payment_term_id" position="after">
+                  <field name="discount_approver" readonly="1" attrs="{'invisible': ['|',('is_sales_manager', '=', True),('is_discout_approved', '=', True)]}"/>
+              </field>
+               <xpath expr="//notebook" position="before">
+
+                  <group name="header_discount">
+                    <group>
+                      <label for="discount" 
+                                attrs="{'invisible': ['|','|','&amp;',('is_discout_flow','=',True),('is_sales_manager' ,'=', False),('is_discout_approved','=',True),('is_discout_hide','=',True)]}"/>
+                        <div>
+                           <field name="discount"
+                                  attrs="{
+                                          'invisible': ['|','|','&amp;',('is_discout_flow','=',True),('is_sales_manager' ,'=', False),('is_discout_approved','=',True),('is_discout_hide','=',True)]}"
+                                  class="oe_inline"/>
+                            <button
+                                name="apply_discount"
+                                type="object" 
+                                string="Apply Discount" 
+                                class="oe_highlight"
+                                attrs="{'invisible': ['|','|','&amp;',('is_discout_flow','=',True),('is_sales_manager' ,'=', False),('is_discout_approved','=',True),('is_discout_hide','=',True)]}"
+                                />
+                       </div>
+                       <field name="is_sales_manager" readonly="1" invisible="1"/>
+                       <field name="is_discout_hide" readonly="1" invisible="1"/>
+                       <field name="is_warning" readonly="1" invisible="1"/>
+                       <field name="is_discout_flow" readonly="1" invisible="1"/>
+                       <field name="is_discout_rejected" readonly="1" invisible="1"/>
+                       <field name="is_discout_approved" readonly="1" invisible="1"/>
+                       <field name="reject_reason" readonly="1" attrs="{'invisible': [('is_discout_rejected', '=', False)]}"/>
+                       <field name="is_reject_reason" readonly="1" invisible="1" />
+                    </group>
+                  </group>
+                </xpath>
+              <xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="attributes">
+                 <attribute name="attrs">{'readonly': ['|','|','&amp;',('parent.is_discout_flow','=',True),('parent.is_sales_manager' ,'=', False),('parent.is_discout_approved','=',True),('parent.is_discout_hide','=',True)]}</attribute>
+              </xpath>
+              </field>
+          </record>
+
+          <record id="discount_settings_view_form" model="ir.ui.view">
+              <field name="name">discount_settings_view_form</field>
+              <field name="model">res.config.settings</field>
+              <field name="priority" eval="85"/>
+              <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+              <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='sale_management']/div[hasclass('o_settings_container')][2]/div[hasclass('o_setting_box')][2]" position="after">
+
+                  <div class="col-xs-12 col-md-6 o_setting_box">
+                      <div class="o_setting_right_pane">
+                          <div class="content-group">
+                            <div class="row mt16">
+                                  <label for="is_send_mail" class="col-md-4 o_light_label"/>
+                                  <field name="is_send_mail"/>
+                              </div>
+                              <div class="row mt16">
+                                  <label for="salesuser_allowed_Discount" class="col-md-4 o_light_label"/>
+                                  <field name="salesuser_allowed_Discount"/>
+                              </div>
+                               <div class="row mt16">
+                                  <label for="salesmanager_allowed_Discount" class="col-md-4 o_light_label"/>
+                                  <field name="salesmanager_allowed_Discount"/>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+              </xpath>
+              </field>
+          </record>
+
+         <record id="discount_sale_view_form" model="ir.ui.view">
+            <field name="name">discount_sale_view_form</field>
+            <field name="model">sale.order</field>
+            <field name="priority" eval="85"/>
+            <field name="inherit_id" ref="sale_management.sale_order_form_quote"/>
+            <field name="arch" type="xml">
+              <field name="sale_order_template_id" position="attributes">
+              <attribute name="attrs">{'readonly': ['|','|',('is_discout_flow', '=', True),('is_discout_approved', '=', True),('is_discout_hide', '=', True)]}</attribute>
+              </field>
+            </field>
+        </record>
+    </data>
+</odoo>
+              

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="email_template_sale_approval" model="mail.template">
+            <field name="name">Sale Discount Approval Mail</field>
+            <field name="email_from">${user.company_id.email}</field>
+            <field name="subject">${ctx['email_subject']} </field>
+            <field name="email_to">${ctx['email_to']}</field>
+            <field name="email_cc">${ctx['email_cc']}</field>
+            <field name="model_id" ref="discount.model_sale_order"/>
+            <field name="auto_delete" eval="False"/>
+            <!-- <field name="user_signature" eval="False"/> -->
+            <field name="body_html"><![CDATA[
+            <p>Dear Sir/Madam,</p>
+                <br/>
+                <p>Kindly approve the Sale quotaion ${ctx['name']} for the customer ${ctx['partner_name']}</p>
+                <br/>
+                <p>Thank You</p>    
+            ]]></field>
+        </record>
+        <record id="email_template_sale_reject" model="mail.template">
+            <field name="name">Sale Discount Reject Mail</field>
+            <field name="email_from">${user.company_id.email}</field>
+            <field name="subject">${ctx['email_subject']} </field>
+            <field name="email_to">${ctx['email_to']}</field>
+            <field name="email_cc">${ctx['email_cc']}</field>
+            <field name="model_id" ref="discount.model_sale_order"/>
+            <field name="auto_delete" eval="False"/>
+            <!-- <field name="user_signature" eval="False"/> -->
+            <field name="body_html"><![CDATA[
+            <p>Dear Sir/Madam,</p>
+                <br/>
+                <p>Discount approval for the sale quoataion ${ctx['name']} has been rejected.</p>
+                <p> Reject Reason: ${ctx['reject_reason']}
+                <br/>
+                <p>Thank You</p>    
+            ]]></field>
+        </record>
+    </data>
+</odoo>
