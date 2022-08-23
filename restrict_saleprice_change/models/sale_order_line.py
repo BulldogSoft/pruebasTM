@@ -29,4 +29,4 @@ class SaleOrderline(models.Model):
                     self.order_id.partner_id)
                 if (price_unit < price) and rule_id:
                     raise UserError(
-                        _('No posee permisos de acceso para canbiar precios')
+                        _('No posee permisos de acceso para cambiar precios %s') % price)
