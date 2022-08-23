@@ -1,0 +1,273 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* discount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-23 20:18+0000\n"
+"PO-Revision-Date: 2022-08-23 14:24-0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_MX\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: discount
+#: model:mail.template,body_html:discount.email_template_sale_reject
+msgid ""
+"\n"
+"            <p>Dear Sir/Madam,</p>\n"
+"                <br/>\n"
+"                <p>Discount approval for the sale quoataion ${ctx['name']} "
+"has been rejected.</p>\n"
+"                <p> Reject Reason: ${ctx['reject_reason']}\n"
+"                <br/>\n"
+"                <p>Thank You</p>    \n"
+"            "
+msgstr ""
+"\n"
+"            <p>Estimado usuario,</p>\n"
+"                <br/>\n"
+"                <p>La aprobación del descuento para la Cotización "
+"${ctx[‘name’]} ha sido rechazada.</p>\n"
+"                <p> Razón del rechazo: ${ctx['reject_reason']}\n"
+"                <br/>\n"
+"               <p>Gracias</p>   \n"
+"            "
+
+#. module: discount
+#: model:mail.template,body_html:discount.email_template_sale_approval
+msgid ""
+"\n"
+"            <p>Dear Sir/Madam,</p>\n"
+"                <br/>\n"
+"                <p>Kindly approve the Sale quotaion ${ctx['name']} for the "
+"customer ${ctx['partner_name']}</p>\n"
+"                <br/>\n"
+"                <p>Thank You</p>    \n"
+"            "
+msgstr ""
+"\n"
+"            <p>Estimado Encargado de descuentos,</p>\n"
+"                <br/>\n"
+"                <p>Por favor, revise el descuento para la cotización "
+"${ctx['name']} del cliente ${ctx['partner_name']}</p>\n"
+"                <br/>\n"
+"                <p>Gracias</p>    \n"
+"            "
+
+#. module: discount
+#: model:mail.template,subject:discount.email_template_sale_approval
+#: model:mail.template,subject:discount.email_template_sale_reject
+#, fuzzy
+msgid "${ctx['email_subject']} "
+msgstr "${ctx['email_subject']}"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_discount_policy_sale
+msgid "Apply Discount"
+msgstr "Aplicar Descuento"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_discount_policy_sale
+msgid "Approve Discount"
+msgstr "Aprobar Descuento"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_discount_policy_sale
+msgid "Approved"
+msgstr "Aprobado"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_discount_policy_sale
+msgid "Ask for Discount Approval"
+msgstr "Solicitar Descuento"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_res_config_settings__is_send_mail
+msgid "Automatic Approval Notification Email."
+msgstr "Correo electrónico de notificación de aprobación de descuento."
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_reject
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: discount
+#: model:ir.model,name:discount.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_discount_policy_sale
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_discount_reject__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_discount_reject__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_order__discount
+msgid "Discount %"
+msgstr "Descuento %"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_order__is_discout_approved
+#, fuzzy
+msgid "Discount Approved"
+msgstr "Descuento aprobado"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_order__discount_approver
+#, fuzzy
+msgid "Discount Approver"
+msgstr "Aprobador de descuentos"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_order__is_discout_rejected
+#, fuzzy
+msgid "Discount Rejected"
+msgstr "Descuento rechazado"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:discount.field_sale_discount_reject__display_name
+#: model:ir.model.fields,field_description:discount.field_sale_order__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_order__is_discout_hide
+msgid "Hide"
+msgstr "Ocultar"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_res_config_settings__id
+#: model:ir.model.fields,field_description:discount.field_sale_discount_reject__id
+#: model:ir.model.fields,field_description:discount.field_sale_order__id
+msgid "ID"
+msgstr "ID"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_discount_policy_sale
+msgid "In Approval"
+msgstr "En Aprobación"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_order__is_discout_flow
+msgid "Is Discount"
+msgstr "Es descuento"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_order__is_reject_reason
+#, fuzzy
+msgid "Is Reject Reason"
+msgstr "Motivo de rechazo"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_order__is_sales_manager
+#, fuzzy
+msgid "Is sales Manager"
+msgstr "Es gerente de ventas"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:discount.field_sale_discount_reject____last_update
+#: model:ir.model.fields,field_description:discount.field_sale_order____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_discount_reject__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_discount_reject__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: discount
+#: model:ir.actions.act_window,name:discount.action_reject
+msgid "Price List"
+msgstr "Lista de precios"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_discount_reject__reason
+msgid "Reason"
+msgstr "Motivo"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_discount_policy_sale
+#, fuzzy
+msgid "Reject Discount"
+msgstr "Rechazar descuento"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_order__reject_reason
+#: model_terms:ir.ui.view,arch_db:discount.view_reject
+msgid "Reject Reason"
+msgstr "Motivo de rechazo"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_discount_policy_sale
+msgid "Rejected"
+msgstr "Rechazado"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_discount_policy_sale
+msgid "Reset To Draft"
+msgstr "Restablecer a borrador"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_res_config_settings__salesmanager_allowed_Discount
+msgid "Sales Manager Allowed Max.Discount(%)"
+msgstr "Gerente Descuento máximo (%)"
+
+#. module: discount
+#: model:ir.model,name:discount.model_sale_order
+msgid "Sales Order"
+msgstr "Órden de venta"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_res_config_settings__salesuser_allowed_Discount
+msgid "Sales Person Allowed Max.Discount(%)"
+msgstr "Vendedor Descuento máximo (%)"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_reject
+msgid "Save"
+msgstr "Guardar"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_discount_policy_sale
+#, fuzzy
+msgid "Send PRO-FORMA Invoice"
+msgstr "Enviar la factura de PRO-FORMA"
+
+#. module: discount
+#: model_terms:ir.ui.view,arch_db:discount.view_discount_policy_sale
+msgid "Send by Email"
+msgstr "Enviar por e-mail"
+
+#. module: discount
+#: model:ir.model.fields,field_description:discount.field_sale_order__is_warning
+msgid "Warning"
+msgstr "Advertencia"
+
+#. module: discount
+#: model:ir.model,name:discount.model_sale_discount_reject
+msgid "sale.discount.reject"
+msgstr "sale.discount.reject"
